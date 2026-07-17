@@ -1,549 +1,414 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoutineCraft - Student Life & Daily Routine Planner</title>
-    <style>
-        /* Base Variables & Reset */
-        :root {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --bg-card: #334155;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent-blue: #38bdf8;
-            --accent-green: #4ade80;
-            --accent-purple: #c084fc;
-            --accent-orange: #fb923c;
-            --border-color: #475569;
-            --radius: 12px;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-primary);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding-bottom: 50px;
-        }
-
-        /* Layout Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header Navigation */
-        header {
-            background-color: var(--bg-secondary);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
-
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--accent-blue);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-        }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-blue);
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 60px 0 40px;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            background: linear-gradient(to right, var(--accent-blue), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto 30px;
-        }
-
-        /* Dashboard Grid Layout */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
-            margin-top: 20px;
-        }
-
-        .card {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius);
-            padding: 24px;
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .card-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
-        /* Time-Blocking Schedule */
-        .schedule-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .time-block {
-            display: flex;
-            align-items: center;
-            background-color: var(--bg-card);
-            padding: 12px 16px;
-            border-radius: 8px;
-            border-left: 4px solid var(--accent-blue);
-        }
-
-        .time-block.class { border-left-color: var(--accent-blue); }
-        .time-block.study { border-left-color: var(--accent-purple); }
-        .time-block.rest { border-left-color: var(--accent-green); }
-        .time-block.social { border-left-color: var(--accent-orange); }
-
-        .time-label {
-            width: 90px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .time-detail {
-            flex-grow: 1;
-        }
-
-        .time-title {
-            font-size: 0.95rem;
-            font-weight: 600;
-        }
-
-        .time-tag {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        /* Checklist Component */
-        .task-list {
-            list-style: none;
-            display: flex;
-            flex-direction: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .task-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background-color: var(--bg-card);
-            padding: 12px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        .task-item input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--accent-green);
-        }
-
-        .task-item.completed span {
-            text-decoration: line-through;
-            color: var(--text-muted);
-        }
-
-        /* Focus Timer */
-        .timer-display {
-            font-size: 3rem;
-            font-weight: 700;
-            text-align: center;
-            margin: 20px 0;
-            font-variant-numeric: tabular-nums;
-            color: var(--accent-purple);
-        }
-
-        .timer-controls {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        .btn {
-            background-color: var(--accent-blue);
-            color: #000;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-        }
-
-        .btn-secondary {
-            background-color: var(--bg-card);
-            color: var(--text-main);
-        }
-
-        /* Preset Template Selector */
-        .template-selector {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            overflow-x: auto;
-            padding-bottom: 5px;
-        }
-
-        .template-btn {
-            background-color: var(--bg-card);
-            color: var(--text-muted);
-            border: 1px solid var(--border-color);
-            padding: 8px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            white-space: nowrap;
-            cursor: pointer;
-        }
-
-        .template-btn.active {
-            background-color: var(--accent-blue);
-            color: #000;
-            border-color: var(--accent-blue);
-            font-weight: 600;
-        }
-
-        /* Footer */
-        footer {
-            margin-top: 60px;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--border-color);
-            padding-top: 20px;
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 1.8rem; }
-            .nav-links { display: none; }
-        }
-    </style>
+    <title>SEA AUTO | Vision Towards Automation</title>
+    <meta name="description" content="SEA AUTO - An MSME Registered Startup pioneering the future of automation, robotics, smart agricultural systems, and AI-driven deep-tech solutions. Founded by Madhav Singh Rajput & Muskan Priya.">
+    <meta name="keywords" content="SEA AUTO, Automation, Robotics, NeuroLeaf, Smart Irrigation, MSME Startup, Begusarai, Bihar, Tech India">
+    
+    <!-- Premium Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icon Fonts & Animation Libraries CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Top Navigation Bar -->
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">⚡ RoutineCraft</div>
-                <ul class="nav-links">
-                    <li><a href="#schedule">Schedule</a></li>
-                    <li><a href="#tasks">Tasks</a></li>
-                    <li><a href="#timer">Focus Timer</a></li>
-                    <li><a href="#wellness">Wellness</a></li>
-                </ul>
-            </nav>
+    <!-- Particle Background Ecosystem -->
+    <div id="particles-js"></div>
+
+    <!-- Custom Premium Cursor Matrix -->
+    <div class="custom-cursor-glow"></div>
+
+    <!-- Navigation Bar (Apple/OpenAI Glassmorphism Style) -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <img src="assets/logo.png" alt="SEA AUTO Logo" class="logo-img">
+                <span class="logo-text">SEA <span class="accent">AUTO</span></span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#marketplace" class="nav-link">Marketplace</a></li>
+                <li><a href="#internship" class="nav-link">Internships</a></li>
+                <li><a href="#gallery" class="nav-link">Projects</a></li>
+                <li><a href="#team" class="nav-link">Team</a></li>
+                <li><a href="#contact" class="btn-primary-nav">Get In Touch</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <!-- Main Container -->
-    <main class="container">
-        
-        <!-- Hero Section -->
-        <section class="hero">
-            <h1>Structure Your Day, Master Your Routine</h1>
-            <p>Balance academics, deep work, health, and social life with an optimized daily student routine structure.</p>
-        </section>
+    <!-- 1. Animated Home Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content" data-aos="fade-up" data-aos-duration="1200">
+            <div class="badge-msme"><i class="fa-solid fa-shield-halved"></i> Govt. of India MSME Registered Startup</div>
+            <h1>Vision Towards <br><span class="text-gradient">Automation</span></h1>
+            <p class="hero-subtitle">Engineering the next epoch of deep-tech industrial autonomy, advanced robotics, and intelligent bio-systems.</p>
+            <div class="hero-cta-group">
+                <a href="#marketplace" class="btn-primary">Explore Ecosystem <i class="fa-solid fa-arrow-right-long"></i></a>
+                <a href="#about" class="btn-secondary">Our Matrix</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+        </div>
+    </section>
 
-        <!-- Main Dashboard Grid -->
-        <div class="dashboard-grid">
-
-            <!-- Section 1: Time-Blocking Schedule -->
-            <section class="card" id="schedule">
-                <div class="card-header">
-                    <h2 class="card-title">📅 Daily Schedule</h2>
+    <!-- 2. About SEA AUTO Section -->
+    <section id="about" class="about-section">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Core Archetype</span>
+                <h2>Redefining Technical Horizons</h2>
+                <div class="header-line"></div>
+            </div>
+            <div class="about-grid">
+                <div class="about-card glass-panel" data-aos="fade-right">
+                    <div class="icon-box"><i class="fa-solid fa-microchip"></i></div>
+                    <h3>Who We Are</h3>
+                    <p>Based in the rising industrial core of Begusarai, Bihar, **SEA AUTO** is a vanguard technological enterprise focused on pioneering proprietary autonomous infrastructure. We research, execute, and deliver enterprise-grade automated systems.</p>
                 </div>
-
-                <!-- Template Filters -->
-                <div class="template-selector">
-                    <button class="template-btn active" onclick="switchSchedule('standard')">Balanced</button>
-                    <button class="template-btn" onclick="switchSchedule('early')">Early Bird</button>
-                    <button class="template-btn" onclick="switchSchedule('night')">Night Owl</button>
-                    <button class="template-btn" onclick="switchSchedule('exam')">Exam Prep</button>
+                <div class="about-card glass-panel" data-aos="fade-up">
+                    <div class="icon-box"><i class="fa-solid fa-brain"></i></div>
+                    <h3>Our Vision</h3>
+                    <p>To eliminate systemic human friction points across industrial, agricultural, and technological sectors by infusing next-generation robotic modules and accessible developer frameworks into the global market engine.</p>
                 </div>
-
-                <div class="schedule-list" id="schedule-container">
-                    <!-- Dynamic Blocks Injected via JS -->
-                </div>
-            </section>
-
-            <!-- Section 2: Task & Habit Manager -->
-            <section class="card" id="tasks">
-                <div class="card-header">
-                    <h2 class="card-title">✅ Today's Goals & Habits</h2>
-                </div>
-
-                <ul class="task-list">
-                    <li class="task-item" onclick="toggleTask(this)">
-                        <input type="checkbox">
-                        <span>Attend Morning Lectures</span>
-                    </li>
-                    <li class="task-item" onclick="toggleTask(this)">
-                        <input type="checkbox">
-                        <span>2 Focus Sessions (Pomodoro)</span>
-                    </li>
-                    <li class="task-item" onclick="toggleTask(this)">
-                        <input type="checkbox">
-                        <span>Review Chemistry Notes (30m)</span>
-                    </li>
-                    <li class="task-item" onclick="toggleTask(this)">
-                        <input type="checkbox">
-                        <span>Drink 2L Water</span>
-                    </li>
-                    <li class="task-item" onclick="toggleTask(this)">
-                        <input type="checkbox">
-                        <span>30 Minutes Physical Exercise</span>
-                    </li>
-                    <li class="task-item" onclick="toggleTask(this)">
-                        <input type="checkbox">
-                        <span>No Screens After 11:00 PM</span>
-                    </li>
-                </ul>
-            </section>
-
-            <!-- Section 3: Study Focus Timer -->
-            <section class="card" id="timer">
-                <div class="card-header">
-                    <h2 class="card-title">⏱️ Deep Work Timer</h2>
-                </div>
-                
-                <div style="text-align: center; color: var(--text-muted); font-size: 0.9rem;">Pomodoro: 25 Min Focus / 5 Min Break</div>
-                
-                <div class="timer-display" id="timer-display">25:00</div>
-                
-                <div class="timer-controls">
-                    <button class="btn" id="start-btn" onclick="toggleTimer()">Start Focus</button>
-                    <button class="btn btn-secondary" onclick="resetTimer()">Reset</button>
-                </div>
-            </section>
-
-            <!-- Section 4: Wellness & Recovery -->
-            <section class="card" id="wellness">
-                <div class="card-header">
-                    <h2 class="card-title">💡 Daily Wellness Tips</h2>
-                </div>
-                <div style="display: flex; flex-direction: column; gap: 15px;">
-                    <div style="background-color: var(--bg-card); padding: 12px; border-radius: 8px;">
-                        <strong style="color: var(--accent-green);">💤 Sleep Optimization</strong>
-                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">Aim for 7.5 - 8 hours. Core memory consolidation happens during deep sleep cycles.</p>
-                    </div>
-                    <div style="background-color: var(--bg-card); padding: 12px; border-radius: 8px;">
-                        <strong style="color: var(--accent-orange);">🥗 High-Energy Study Snacks</strong>
-                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">Opt for walnuts, dark chocolate, and blueberries for sustained brain output without sugar crashes.</p>
+                <div class="about-card glass-panel" data-aos="fade-left">
+                    <div class="icon-box"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3>Key Milestones</h3>
+                    <div class="stats-container">
+                        <div class="stat-item"><span class="counter" data-target="15">0</span><span class="stat-plus">+</span><p>Proprietary Systems</p></div>
+                        <div class="stat-item"><span class="counter" data-target="500">0</span><span class="stat-plus">+</span><p>Engineers Trained</p></div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Marketplace / Products Store Section -->
+    <section id="marketplace" class="marketplace-section">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Next-Gen Store</span>
+                <h2>Hardware & Software Nodes</h2>
+                <div class="header-line"></div>
+            </div>
+
+            <!-- Search and Filtering UI Dynamic Bar -->
+            <div class="filter-bar glass-panel" data-aos="zoom-in">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="product-search" placeholder="Search components, systems, blueprints...">
+                </div>
+                <div class="filter-tags">
+                    <button class="filter-btn active" data-filter="all">All Ecosystems</button>
+                    <button class="filter-btn" data-filter="systems">Flagship Systems</button>
+                    <button class="filter-btn" data-filter="components">Microcontrollers & ICs</button>
+                    <button class="filter-btn" data-filter="digital">Digital Assets & STL</button>
+                </div>
+            </div>
+
+            <!-- Products Dynamic Layout Grid -->
+            <div class="products-grid" id="products-container">
+                <!-- Products dynamically processed via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Internship Portal Section -->
+    <section id="internship" class="internship-section">
+        <div class="section-container">
+            <div class="internship-wrapper glass-panel" data-aos="zoom-out-up">
+                <div class="internship-content">
+                    <span class="section-tag-light">Incubation Program</span>
+                    <h2>Forge Your Technical Legacy</h2>
+                    <p>Accelerate your vector. Join the SEA AUTO research cohorts. Engage directly with live production models in hardware architecture, embedded engineering, additive manufacturing, and system integration pipelines.</p>
+                    <ul class="benefit-list">
+                        <li><i class="fa-solid fa-circle-check"></i> Industrial Grade Work & Mentorship</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Verified MSME Startup Certification Portfolio</li>
+                        <li><i class="fa-solid fa-circle-check"></i> Direct pipeline into R&D Division</li>
+                    </ul>
+                    <a href="#inquiry" class="btn-primary">Apply For Internship <i class="fa-solid fa-graduation-cap"></i></a>
+                </div>
+                <div class="internship-graphic">
+                    <div class="pulse-ring"></div>
+                    <i class="fa-solid fa-terminal graphic-icon"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Projects Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">R&D Lab Records</span>
+                <h2>Innovation Sandbox</h2>
+                <div class="header-line"></div>
+            </div>
+            <div class="gallery-masonry">
+                <div class="gallery-item glass-panel" data-aos="fade-up">
+                    <div class="gallery-img-wrapper">
+                        <div class="gallery-placeholder"><i class="fa-solid fa-seedling"></i></div>
+                    </div>
+                    <div class="gallery-meta">
+                        <h4>Smart Irrigation Array V2</h4>
+                        <p>Autonomous closed-loop micro-agricultural controller.</p>
+                    </div>
+                </div>
+                <div class="gallery-item glass-panel" data-aos="fade-up" data-aos-delay="100">
+                    <div class="gallery-img-wrapper">
+                        <div class="gallery-placeholder"><i class="fa-solid fa-brain"></i></div>
+                    </div>
+                    <div class="gallery-meta">
+                        <h4>NeuroLeaf Neural Net</h4>
+                        <p>Plant disease classification running locally on edge TPU.</p>
+                    </div>
+                </div>
+                <div class="gallery-item glass-panel" data-aos="fade-up" data-aos-delay="200">
+                    <div class="gallery-img-wrapper">
+                        <div class="gallery-placeholder"><i class="fa-solid fa-robot"></i></div>
+                    </div>
+                    <div class="gallery-meta">
+                        <h4>Omni-Drive Rover Frame</h4>
+                        <p>High-torque robotics testbed optimized for challenging terrain.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Certificates & Recognition Section -->
+    <section class="recognition-section">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Compliance & Trust</span>
+                <h2>Corporate Accreditations</h2>
+                <div class="header-line"></div>
+            </div>
+            <div class="recognition-row">
+                <div class="rec-badge glass-panel" data-aos="flip-left">
+                    <i class="fa-solid fa-building-shield"></i>
+                    <h4>MSME Registered</h4>
+                    <p>Ministry of Micro, Small & Medium Enterprises</p>
+                </div>
+                <div class="rec-badge glass-panel" data-aos="flip-left" data-aos-delay="100">
+                    <i class="fa-solid fa-microchip"></i>
+                    <h4>Make In India</h4>
+                    <p>Committed to local deep-tech hardware scaling</p>
+                </div>
+                <div class="rec-badge glass-panel" data-aos="flip-left" data-aos-delay="200">
+                    <i class="fa-solid fa-award"></i>
+                    <h4>Quality Standards</h4>
+                    <p>Rigorous bench testing for engineering reliability</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Team Section -->
+    <section id="team" class="team-section">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">The Architects</span>
+                <h2>Executive Leadership</h2>
+                <div class="header-line"></div>
+            </div>
+            <div class="team-grid">
+                <!-- Founder -->
+                <div class="team-card glass-panel" data-aos="fade-right">
+                    <div class="member-avatar-wrapper">
+                        <img src="assets/madhav.png" alt="Madhav Singh Rajput" class="member-avatar">
+                    </div>
+                    <div class="member-details">
+                        <h3>Madhav Singh Rajput</h3>
+                        <span class="role">Founder & Chief Architecture Engineer</span>
+                        <p>Directs core platform design paradigms, embedded control software systems, and strategic market mapping pipelines.</p>
+                        <div class="member-socials">
+                            <a href="#"><i class="fa-brands rel-icon fa-linkedin"></i></a>
+                            <a href="#"><i class="fa-brands rel-icon fa-github"></i></a>
+                            <a href="#"><i class="fa-solid rel-icon fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Co-Founder -->
+                <div class="team-card glass-panel" data-aos="fade-left">
+                    <div class="member-avatar-wrapper">
+                        <img src="assets/muskan.png" alt="Muskan Priya" class="member-avatar">
+                    </div>
+                    <div class="member-details">
+                        <h3>Muskan Priya</h3>
+                        <span class="role">Co-Founder & Head of Systems Operations</span>
+                        <p>Orchestrates corporate strategic operations, cross-platform logistics, resource management, and compliance frameworks.</p>
+                        <div class="member-socials">
+                            <a href="#"><i class="fa-brands rel-icon fa-linkedin"></i></a>
+                            <a href="#"><i class="fa-brands rel-icon fa-github"></i></a>
+                            <a href="#"><i class="fa-solid rel-icon fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Ecosystem Additions: FAQ & Testimonials Matrix -->
+    <section class="insights-section">
+        <div class="section-container info-matrix-grid">
+            
+            <!-- Testimonials Column -->
+            <div class="testimonials-column" data-aos="fade-right">
+                <span class="section-tag">Validation</span>
+                <h3>Cohort Testimonials</h3>
+                <div class="testimonial-slider glass-panel">
+                    <p class="testimonial-text">"The spatial depth of understanding I obtained regarding localized automated hardware design during my time with SEA AUTO shifted my career vector completely."</p>
+                    <div class="testimonial-author">
+                        <h5>Aalok Kumar</h5>
+                        <span>R&D Systems Intern</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Accordion Matrix -->
+            <div class="faq-column" data-aos="fade-left">
+                <span class="section-tag">Information Bureau</span>
+                <h3>Frequently Queries</h3>
+                <div class="accordion-container">
+                    <div class="accordion-item glass-panel">
+                        <div class="accordion-title">How do I deploy SEA AUTO STL files? <i class="fa-solid fa-chevron-down"></i></div>
+                        <div class="accordion-content"><p>All digital STL outputs from our catalog are pre-sliced and optimized for unified FDM/SLA desktop 3D printing configurations.</p></div>
+                    </div>
+                    <div class="accordion-item glass-panel">
+                        <div class="accordion-title">Are enterprise bulk hardware orders possible? <i class="fa-solid fa-chevron-down"></i></div>
+                        <div class="accordion-content"><p>Yes, wholesale architectural units, sensors, and customized microcontroller lots can be verified directly via our central engineering desk.</p></div>
+                    </div>
+                </div>
+            </div>
 
         </div>
-    </main>
+    </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 RoutineCraft Platform. Designed for high-performance student productivity.</p>
+    <!-- 8. Contact Us & 9. Inquiry Form Section -->
+    <section id="contact" class="contact-section">
+        <div class="section-container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Secure Channels</span>
+                <h2>Initiate Protocol</h2>
+                <div class="header-line"></div>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info-panel glass-panel" data-aos="fade-right">
+                    <h3>Command Infrastructure</h3>
+                    <p>Connect with our central operations office for custom orders, business investments, or engineering consultations.</p>
+                    
+                    <div class="info-link-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div>
+                            <h5>Headquarters</h5>
+                            <p>Begusarai, Bihar, India</p>
+                        </div>
+                    </div>
+                    <div class="info-link-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <div>
+                            <h5>Engineering Communications</h5>
+                            <p>support@seaauto.in</p>
+                        </div>
+                    </div>
+                    <div class="info-link-item">
+                        <i class="fa-solid fa-microchip"></i>
+                        <div>
+                            <h5>Corporate Status</h5>
+                            <p>Govt. of India MSME Registered Entity</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="inquiry" class="contact-form-panel glass-panel" data-aos="fade-left">
+                    <form id="sea-inquiry-form" onsubmit="handleInquirySubmit(event)">
+                        <div class="form-row-twin">
+                            <div class="form-group">
+                                <label for="form-name">Full Name</label>
+                                <input type="text" id="form-name" required placeholder="e.g. Vikramaditya Singh">
+                            </div>
+                            <div class="form-group">
+                                <label for="form-email">Email Address</label>
+                                <input type="email" id="form-email" required placeholder="name@domain.com">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="form-intent">Operational Matrix</label>
+                            <select id="form-intent" required>
+                                <option value="product">Enterprise Hardware Procurement</option>
+                                <option value="internship">Research Cohort Application</option>
+                                <option value="custom">Custom R&D System Request</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="form-msg">Detailed Transmission Specification</label>
+                            <textarea id="form-msg" rows="5" required placeholder="Outline the parameters of your requirement..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary-form">Transmit Secure Signal <i class="fa-solid fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. WhatsApp Floating Button -->
+    <a href="https://wa.me/919123456789?text=Hello%20SEA%20AUTO%20Team%2C%20I%20am%20interested%20in%20your%20automation%20ecosystem." class="whatsapp-floating" target="_blank" aria-label="Connect via WhatsApp Secure Link">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span class="tooltip-text">Direct Engineering Desk</span>
+    </a>
+
+    <!-- 11. Footer Section -->
+    <footer class="footer">
+        <div class="section-container footer-grid">
+            <div class="footer-brand-col">
+                <span class="footer-logo">SEA <span class="accent">AUTO</span></span>
+                <p class="tagline">Vision Towards Automation</p>
+                <p class="legal-disclaimer">An officially cataloged MSME Registered Technology Startup. Delivering premium automated modules locally and globally.</p>
+            </div>
+            <div class="footer-links-col">
+                <h4>System Links</h4>
+                <ul>
+                    <li><a href="#home">Home Base</a></li>
+                    <li><a href="#about">Our Identity</a></li>
+                    <li><a href="#marketplace">Hardware Market</a></li>
+                    <li><a href="#internship">Incubator</a></li>
+                </ul>
+            </div>
+            <div class="footer-news-col">
+                <h4>Newsletter Protocol</h4>
+                <p>Subscribe to receive high-impact logs on firmware releases, robotics modules, and engineering updates.</p>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="enter operational email" aria-label="Newsletter email">
+                    <button type="button" onclick="alert('Secure Subscription Route Authenticated.')"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SEA AUTO. All Rights Reserved. Designed for Maximum Efficiency.</p>
         </div>
     </footer>
 
-    <!-- Interactive JavaScript -->
-    <script>
-        // Preset Schedule Data
-        const schedules = {
-            standard: [
-                { time: "07:00 AM", title: "Morning Routine & Breakfast", type: "rest", tag: "Wellness" },
-                { time: "08:30 AM", title: "Classes & Lectures", type: "class", tag: "Academics" },
-                { time: "01:00 PM", title: "Lunch & Relaxation", type: "rest", tag: "Break" },
-                { time: "02:30 PM", title: "Deep Work / Study Block 1", type: "study", tag: "Focus" },
-                { time: "05:00 PM", title: "Exercise / Recreation", type: "social", tag: "Health" },
-                { time: "07:00 PM", title: "Dinner & Downtime", type: "rest", tag: "Personal" },
-                { time: "08:30 PM", title: "Light Review & Planning Next Day", type: "study", tag: "Focus" },
-                { time: "11:00 PM", title: "Wind Down & Sleep", type: "rest", tag: "Sleep" }
-            ],
-            early: [
-                { time: "05:30 AM", title: "Early Workout & Breakfast", type: "rest", tag: "Health" },
-                { time: "06:30 AM", title: "Deep Work Session (Quiet)", type: "study", tag: "Focus" },
-                { time: "09:00 AM", title: "Classes / University", type: "class", tag: "Academics" },
-                { time: "02:00 PM", title: "Assignments & Project Work", type: "study", tag: "Focus" },
-                { time: "06:00 PM", title: "Dinner & Socializing", type: "social", tag: "Personal" },
-                { time: "10:00 PM", title: "Sleep", type: "rest", tag: "Sleep" }
-            ],
-            night: [
-                { time: "09:00 AM", title: "Wake Up & Breakfast", type: "rest", tag: "Wellness" },
-                { time: "10:00 AM", title: "Classes & Study Group", type: "class", tag: "Academics" },
-                { time: "03:00 PM", title: "Exercise & Free Time", type: "social", tag: "Health" },
-                { time: "07:00 PM", title: "Dinner", type: "rest", tag: "Personal" },
-                { time: "08:30 PM", title: "Night Study Block (Peak Focus)", type: "study", tag: "Focus" },
-                { time: "01:00 AM", title: "Sleep", type: "rest", tag: "Sleep" }
-            ],
-            exam: [
-                { time: "07:30 AM", title: "Breakfast & Quick Flashcards", type: "study", tag: "Review" },
-                { time: "08:30 AM", title: "Core Subject Block 1", type: "study", tag: "Heavy Focus" },
-                { time: "12:00 PM", title: "Lunch & Active Walk", type: "rest", tag: "Break" },
-                { time: "01:30 PM", title: "Mock Exam / Practice Questions", type: "study", tag: "Heavy Focus" },
-                { time: "05:00 PM", title: "Break & Dinner", type: "rest", tag: "Break" },
-                { time: "07:00 PM", title: "Revision & Weak Spot Drills", type: "study", tag: "Review" },
-                { time: "10:30 PM", title: "Sleep (Crucial for Memory)", type: "rest", tag: "Sleep" }
-            ]
-        };
-
-        // Render Schedule Function
-        function switchSchedule(key) {
-            const container = document.getElementById('schedule-container');
-            container.innerHTML = '';
-
-            // Update button styles
-            document.querySelectorAll('.template-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-
-            // Populate schedule items
-            schedules[key].forEach(item => {
-                const block = document.createElement('div');
-                block.className = `time-block ${item.type}`;
-                block.innerHTML = `
-                    <div class="time-label">${item.time}</div>
-                    <div class="time-detail">
-                        <div class="time-title">${item.title}</div>
-                        <div class="time-tag">${item.tag}</div>
-                    </div>
-                `;
-                container.appendChild(block);
-            });
-        }
-
-        // Task Item Toggle
-        function toggleTask(element) {
-            const checkbox = element.querySelector('input');
-            checkbox.checked = !checkbox.checked;
-            element.classList.toggle('completed', checkbox.checked);
-        }
-
-        // Timer Functionality
-        let timerInterval = null;
-        let timeLeft = 25 * 60; // 25 minutes
-        let isRunning = false;
-
-        function updateTimerDisplay() {
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            document.getElementById('timer-display').textContent = 
-                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }
-
-        function toggleTimer() {
-            const btn = document.getElementById('start-btn');
-            if (isRunning) {
-                clearInterval(timerInterval);
-                btn.textContent = "Start Focus";
-                btn.style.backgroundColor = "var(--accent-blue)";
-            } else {
-                timerInterval = setInterval(() => {
-                    if (timeLeft > 0) {
-                        timeLeft--;
-                        updateTimerDisplay();
-                    } else {
-                        clearInterval(timerInterval);
-                        alert("Pomodoro session completed! Time for a short break.");
-                        resetTimer();
-                    }
-                }, 1000);
-                btn.textContent = "Pause";
-                btn.style.backgroundColor = "var(--accent-orange)";
-            }
-            isRunning = !isRunning;
-        }
-
-        function resetTimer() {
-            clearInterval(timerInterval);
-            isRunning = false;
-            timeLeft = 25 * 60;
-            updateTimerDisplay();
-            const btn = document.getElementById('start-btn');
-            btn.textContent = "Start Focus";
-            btn.style.backgroundColor = "var(--accent-blue)";
-        }
-
-        // Initial Load
-        window.onload = () => {
-            // Load default 'standard' schedule manually to set up initial view
-            const container = document.getElementById('schedule-container');
-            schedules.standard.forEach(item => {
-                const block = document.createElement('div');
-                block.className = `time-block ${item.type}`;
-                block.innerHTML = `
-                    <div class="time-label">${item.time}</div>
-                    <div class="time-detail">
-                        <div class="time-title">${item.title}</div>
-                        <div class="time-tag">${item.tag}</div>
-                    </div>
-                `;
-                container.appendChild(block);
-            });
-        };
-    </script>
+    <!-- Premium Framework Engines (GSAP, Particles, AOS) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="script.js"></script>
 </body>
-</html>
+</html>                      
