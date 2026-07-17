@@ -1,414 +1,500 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEA AUTO | Vision Towards Automation</title>
-    <meta name="description" content="SEA AUTO - An MSME Registered Startup pioneering the future of automation, robotics, smart agricultural systems, and AI-driven deep-tech solutions. Founded by Madhav Singh Rajput & Muskan Priya.">
-    <meta name="keywords" content="SEA AUTO, Automation, Robotics, NeuroLeaf, Smart Irrigation, MSME Startup, Begusarai, Bihar, Tech India">
-    
-    <!-- Premium Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Icon Fonts & Animation Libraries CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <link rel="stylesheet" href="style.css">
+    <title>EduPlan Pro - Student Planner & Assistant</title>
+    <style>
+        :root {
+            --bg-primary: #f4f6f9;
+            --bg-card: #ffffff;
+            --text-main: #2d3748;
+            --text-muted: #718096;
+            --accent: #4f46e5;
+            --accent-hover: #4338ca;
+            --border: #e2e8f0;
+            --success: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar Navigation */
+        aside {
+            width: 260px;
+            background-color: var(--bg-card);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.5rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .nav-item {
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background-color: #eeebff;
+            color: var(--accent);
+        }
+
+        /* Main Content Layout */
+        main {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .planner-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Task List Styles */
+        .task-input-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        input, select, button {
+            padding: 0.6rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 0.375rem;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--accent);
+        }
+
+        input[type="text"] {
+            flex: 1;
+        }
+
+        button.btn-primary {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        button.btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .task-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 0.375rem;
+            background: var(--bg-primary);
+        }
+
+        .task-item.completed span {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        /* Pomodoro Timer */
+        .timer-display {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin: 1rem 0;
+            font-family: monospace;
+            color: var(--accent);
+        }
+
+        .timer-controls {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        /* Personal Assistant Chatbot Side Panel */
+        .assistant-panel {
+            background: var(--bg-card);
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 4rem);
+            position: sticky;
+            top: 0;
+        }
+
+        .assistant-header {
+            padding: 1.25rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1.25rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .message.assistant {
+            background-color: var(--bg-primary);
+            align-self: flex-start;
+            border-bottom-left-radius: 0;
+        }
+
+        .message.user {
+            background-color: var(--accent);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 0;
+        }
+
+        .chat-input-area {
+            padding: 1rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* Weekly Schedule Grid */
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .day-column {
+            background: var(--bg-primary);
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            min-height: 120px;
+        }
+
+        .day-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        .schedule-item {
+            background: white;
+            border-left: 3px solid var(--accent);
+            padding: 0.4rem;
+            font-size: 0.8rem;
+            margin-bottom: 0.4rem;
+            border-radius: 0 0.25rem 0.25rem 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Particle Background Ecosystem -->
-    <div id="particles-js"></div>
-
-    <!-- Custom Premium Cursor Matrix -->
-    <div class="custom-cursor-glow"></div>
-
-    <!-- Navigation Bar (Apple/OpenAI Glassmorphism Style) -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="nav-logo">
-                <img src="assets/logo.png" alt="SEA AUTO Logo" class="logo-img">
-                <span class="logo-text">SEA <span class="accent">AUTO</span></span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#marketplace" class="nav-link">Marketplace</a></li>
-                <li><a href="#internship" class="nav-link">Internships</a></li>
-                <li><a href="#gallery" class="nav-link">Projects</a></li>
-                <li><a href="#team" class="nav-link">Team</a></li>
-                <li><a href="#contact" class="btn-primary-nav">Get In Touch</a></li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
+    <!-- Sidebar Navigation -->
+    <aside>
+        <div class="logo">
+            <span>📚</span> EduPlan Pro
         </div>
-    </nav>
+        <ul class="nav-links">
+            <li class="nav-item active">Dashboard</li>
+            <li class="nav-item">Tasks & Deadlines</li>
+            <li class="nav-item">Analytics</li>
+            <li class="nav-item">Settings</li>
+        </ul>
+    </aside>
 
-    <!-- 1. Animated Home Hero Section -->
-    <section id="home" class="hero-section">
-        <div class="hero-content" data-aos="fade-up" data-aos-duration="1200">
-            <div class="badge-msme"><i class="fa-solid fa-shield-halved"></i> Govt. of India MSME Registered Startup</div>
-            <h1>Vision Towards <br><span class="text-gradient">Automation</span></h1>
-            <p class="hero-subtitle">Engineering the next epoch of deep-tech industrial autonomy, advanced robotics, and intelligent bio-systems.</p>
-            <div class="hero-cta-group">
-                <a href="#marketplace" class="btn-primary">Explore Ecosystem <i class="fa-solid fa-arrow-right-long"></i></a>
-                <a href="#about" class="btn-secondary">Our Matrix</a>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="mouse">
-                <div class="wheel"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 2. About SEA AUTO Section -->
-    <section id="about" class="about-section">
-        <div class="section-container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-tag">Core Archetype</span>
-                <h2>Redefining Technical Horizons</h2>
-                <div class="header-line"></div>
-            </div>
-            <div class="about-grid">
-                <div class="about-card glass-panel" data-aos="fade-right">
-                    <div class="icon-box"><i class="fa-solid fa-microchip"></i></div>
-                    <h3>Who We Are</h3>
-                    <p>Based in the rising industrial core of Begusarai, Bihar, **SEA AUTO** is a vanguard technological enterprise focused on pioneering proprietary autonomous infrastructure. We research, execute, and deliver enterprise-grade automated systems.</p>
+    <!-- Main Workspace -->
+    <main>
+        <div class="planner-section">
+            <!-- Task Manager Card -->
+            <div class="card">
+                <h2>Today's Focus Tasks</h2>
+                <div class="task-input-group">
+                    <input type="text" id="task-input" placeholder="Add a new study goal or assignment...">
+                    <button class="btn-primary" onclick="addTask()">Add Goal</button>
                 </div>
-                <div class="about-card glass-panel" data-aos="fade-up">
-                    <div class="icon-box"><i class="fa-solid fa-brain"></i></div>
-                    <h3>Our Vision</h3>
-                    <p>To eliminate systemic human friction points across industrial, agricultural, and technological sectors by infusing next-generation robotic modules and accessible developer frameworks into the global market engine.</p>
-                </div>
-                <div class="about-card glass-panel" data-aos="fade-left">
-                    <div class="icon-box"><i class="fa-solid fa-chart-line"></i></div>
-                    <h3>Key Milestones</h3>
-                    <div class="stats-container">
-                        <div class="stat-item"><span class="counter" data-target="15">0</span><span class="stat-plus">+</span><p>Proprietary Systems</p></div>
-                        <div class="stat-item"><span class="counter" data-target="500">0</span><span class="stat-plus">+</span><p>Engineers Trained</p></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. Marketplace / Products Store Section -->
-    <section id="marketplace" class="marketplace-section">
-        <div class="section-container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-tag">Next-Gen Store</span>
-                <h2>Hardware & Software Nodes</h2>
-                <div class="header-line"></div>
-            </div>
-
-            <!-- Search and Filtering UI Dynamic Bar -->
-            <div class="filter-bar glass-panel" data-aos="zoom-in">
-                <div class="search-box">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" id="product-search" placeholder="Search components, systems, blueprints...">
-                </div>
-                <div class="filter-tags">
-                    <button class="filter-btn active" data-filter="all">All Ecosystems</button>
-                    <button class="filter-btn" data-filter="systems">Flagship Systems</button>
-                    <button class="filter-btn" data-filter="components">Microcontrollers & ICs</button>
-                    <button class="filter-btn" data-filter="digital">Digital Assets & STL</button>
-                </div>
-            </div>
-
-            <!-- Products Dynamic Layout Grid -->
-            <div class="products-grid" id="products-container">
-                <!-- Products dynamically processed via JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. Internship Portal Section -->
-    <section id="internship" class="internship-section">
-        <div class="section-container">
-            <div class="internship-wrapper glass-panel" data-aos="zoom-out-up">
-                <div class="internship-content">
-                    <span class="section-tag-light">Incubation Program</span>
-                    <h2>Forge Your Technical Legacy</h2>
-                    <p>Accelerate your vector. Join the SEA AUTO research cohorts. Engage directly with live production models in hardware architecture, embedded engineering, additive manufacturing, and system integration pipelines.</p>
-                    <ul class="benefit-list">
-                        <li><i class="fa-solid fa-circle-check"></i> Industrial Grade Work & Mentorship</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Verified MSME Startup Certification Portfolio</li>
-                        <li><i class="fa-solid fa-circle-check"></i> Direct pipeline into R&D Division</li>
-                    </ul>
-                    <a href="#inquiry" class="btn-primary">Apply For Internship <i class="fa-solid fa-graduation-cap"></i></a>
-                </div>
-                <div class="internship-graphic">
-                    <div class="pulse-ring"></div>
-                    <i class="fa-solid fa-terminal graphic-icon"></i>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. Projects Gallery Section -->
-    <section id="gallery" class="gallery-section">
-        <div class="section-container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-tag">R&D Lab Records</span>
-                <h2>Innovation Sandbox</h2>
-                <div class="header-line"></div>
-            </div>
-            <div class="gallery-masonry">
-                <div class="gallery-item glass-panel" data-aos="fade-up">
-                    <div class="gallery-img-wrapper">
-                        <div class="gallery-placeholder"><i class="fa-solid fa-seedling"></i></div>
-                    </div>
-                    <div class="gallery-meta">
-                        <h4>Smart Irrigation Array V2</h4>
-                        <p>Autonomous closed-loop micro-agricultural controller.</p>
-                    </div>
-                </div>
-                <div class="gallery-item glass-panel" data-aos="fade-up" data-aos-delay="100">
-                    <div class="gallery-img-wrapper">
-                        <div class="gallery-placeholder"><i class="fa-solid fa-brain"></i></div>
-                    </div>
-                    <div class="gallery-meta">
-                        <h4>NeuroLeaf Neural Net</h4>
-                        <p>Plant disease classification running locally on edge TPU.</p>
-                    </div>
-                </div>
-                <div class="gallery-item glass-panel" data-aos="fade-up" data-aos-delay="200">
-                    <div class="gallery-img-wrapper">
-                        <div class="gallery-placeholder"><i class="fa-solid fa-robot"></i></div>
-                    </div>
-                    <div class="gallery-meta">
-                        <h4>Omni-Drive Rover Frame</h4>
-                        <p>High-torque robotics testbed optimized for challenging terrain.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. Certificates & Recognition Section -->
-    <section class="recognition-section">
-        <div class="section-container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-tag">Compliance & Trust</span>
-                <h2>Corporate Accreditations</h2>
-                <div class="header-line"></div>
-            </div>
-            <div class="recognition-row">
-                <div class="rec-badge glass-panel" data-aos="flip-left">
-                    <i class="fa-solid fa-building-shield"></i>
-                    <h4>MSME Registered</h4>
-                    <p>Ministry of Micro, Small & Medium Enterprises</p>
-                </div>
-                <div class="rec-badge glass-panel" data-aos="flip-left" data-aos-delay="100">
-                    <i class="fa-solid fa-microchip"></i>
-                    <h4>Make In India</h4>
-                    <p>Committed to local deep-tech hardware scaling</p>
-                </div>
-                <div class="rec-badge glass-panel" data-aos="flip-left" data-aos-delay="200">
-                    <i class="fa-solid fa-award"></i>
-                    <h4>Quality Standards</h4>
-                    <p>Rigorous bench testing for engineering reliability</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 7. Team Section -->
-    <section id="team" class="team-section">
-        <div class="section-container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-tag">The Architects</span>
-                <h2>Executive Leadership</h2>
-                <div class="header-line"></div>
-            </div>
-            <div class="team-grid">
-                <!-- Founder -->
-                <div class="team-card glass-panel" data-aos="fade-right">
-                    <div class="member-avatar-wrapper">
-                        <img src="assets/madhav.png" alt="Madhav Singh Rajput" class="member-avatar">
-                    </div>
-                    <div class="member-details">
-                        <h3>Madhav Singh Rajput</h3>
-                        <span class="role">Founder & Chief Architecture Engineer</span>
-                        <p>Directs core platform design paradigms, embedded control software systems, and strategic market mapping pipelines.</p>
-                        <div class="member-socials">
-                            <a href="#"><i class="fa-brands rel-icon fa-linkedin"></i></a>
-                            <a href="#"><i class="fa-brands rel-icon fa-github"></i></a>
-                            <a href="#"><i class="fa-solid rel-icon fa-envelope"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Co-Founder -->
-                <div class="team-card glass-panel" data-aos="fade-left">
-                    <div class="member-avatar-wrapper">
-                        <img src="assets/muskan.png" alt="Muskan Priya" class="member-avatar">
-                    </div>
-                    <div class="member-details">
-                        <h3>Muskan Priya</h3>
-                        <span class="role">Co-Founder & Head of Systems Operations</span>
-                        <p>Orchestrates corporate strategic operations, cross-platform logistics, resource management, and compliance frameworks.</p>
-                        <div class="member-socials">
-                            <a href="#"><i class="fa-brands rel-icon fa-linkedin"></i></a>
-                            <a href="#"><i class="fa-brands rel-icon fa-github"></i></a>
-                            <a href="#"><i class="fa-solid rel-icon fa-envelope"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Interactive Ecosystem Additions: FAQ & Testimonials Matrix -->
-    <section class="insights-section">
-        <div class="section-container info-matrix-grid">
-            
-            <!-- Testimonials Column -->
-            <div class="testimonials-column" data-aos="fade-right">
-                <span class="section-tag">Validation</span>
-                <h3>Cohort Testimonials</h3>
-                <div class="testimonial-slider glass-panel">
-                    <p class="testimonial-text">"The spatial depth of understanding I obtained regarding localized automated hardware design during my time with SEA AUTO shifted my career vector completely."</p>
-                    <div class="testimonial-author">
-                        <h5>Aalok Kumar</h5>
-                        <span>R&D Systems Intern</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ Accordion Matrix -->
-            <div class="faq-column" data-aos="fade-left">
-                <span class="section-tag">Information Bureau</span>
-                <h3>Frequently Queries</h3>
-                <div class="accordion-container">
-                    <div class="accordion-item glass-panel">
-                        <div class="accordion-title">How do I deploy SEA AUTO STL files? <i class="fa-solid fa-chevron-down"></i></div>
-                        <div class="accordion-content"><p>All digital STL outputs from our catalog are pre-sliced and optimized for unified FDM/SLA desktop 3D printing configurations.</p></div>
-                    </div>
-                    <div class="accordion-item glass-panel">
-                        <div class="accordion-title">Are enterprise bulk hardware orders possible? <i class="fa-solid fa-chevron-down"></i></div>
-                        <div class="accordion-content"><p>Yes, wholesale architectural units, sensors, and customized microcontroller lots can be verified directly via our central engineering desk.</p></div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- 8. Contact Us & 9. Inquiry Form Section -->
-    <section id="contact" class="contact-section">
-        <div class="section-container">
-            <div class="section-header" data-aos="fade-up">
-                <span class="section-tag">Secure Channels</span>
-                <h2>Initiate Protocol</h2>
-                <div class="header-line"></div>
-            </div>
-            <div class="contact-grid">
-                <div class="contact-info-panel glass-panel" data-aos="fade-right">
-                    <h3>Command Infrastructure</h3>
-                    <p>Connect with our central operations office for custom orders, business investments, or engineering consultations.</p>
-                    
-                    <div class="info-link-item">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <div>
-                            <h5>Headquarters</h5>
-                            <p>Begusarai, Bihar, India</p>
-                        </div>
-                    </div>
-                    <div class="info-link-item">
-                        <i class="fa-solid fa-envelope"></i>
-                        <div>
-                            <h5>Engineering Communications</h5>
-                            <p>support@seaauto.in</p>
-                        </div>
-                    </div>
-                    <div class="info-link-item">
-                        <i class="fa-solid fa-microchip"></i>
-                        <div>
-                            <h5>Corporate Status</h5>
-                            <p>Govt. of India MSME Registered Entity</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="inquiry" class="contact-form-panel glass-panel" data-aos="fade-left">
-                    <form id="sea-inquiry-form" onsubmit="handleInquirySubmit(event)">
-                        <div class="form-row-twin">
-                            <div class="form-group">
-                                <label for="form-name">Full Name</label>
-                                <input type="text" id="form-name" required placeholder="e.g. Vikramaditya Singh">
-                            </div>
-                            <div class="form-group">
-                                <label for="form-email">Email Address</label>
-                                <input type="email" id="form-email" required placeholder="name@domain.com">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="form-intent">Operational Matrix</label>
-                            <select id="form-intent" required>
-                                <option value="product">Enterprise Hardware Procurement</option>
-                                <option value="internship">Research Cohort Application</option>
-                                <option value="custom">Custom R&D System Request</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="form-msg">Detailed Transmission Specification</label>
-                            <textarea id="form-msg" rows="5" required placeholder="Outline the parameters of your requirement..."></textarea>
-                        </div>
-                        <button type="submit" class="btn-primary-form">Transmit Secure Signal <i class="fa-solid fa-paper-plane"></i></button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 10. WhatsApp Floating Button -->
-    <a href="https://wa.me/919123456789?text=Hello%20SEA%20AUTO%20Team%2C%20I%20am%20interested%20in%20your%20automation%20ecosystem." class="whatsapp-floating" target="_blank" aria-label="Connect via WhatsApp Secure Link">
-        <i class="fa-brands fa-whatsapp"></i>
-        <span class="tooltip-text">Direct Engineering Desk</span>
-    </a>
-
-    <!-- 11. Footer Section -->
-    <footer class="footer">
-        <div class="section-container footer-grid">
-            <div class="footer-brand-col">
-                <span class="footer-logo">SEA <span class="accent">AUTO</span></span>
-                <p class="tagline">Vision Towards Automation</p>
-                <p class="legal-disclaimer">An officially cataloged MSME Registered Technology Startup. Delivering premium automated modules locally and globally.</p>
-            </div>
-            <div class="footer-links-col">
-                <h4>System Links</h4>
-                <ul>
-                    <li><a href="#home">Home Base</a></li>
-                    <li><a href="#about">Our Identity</a></li>
-                    <li><a href="#marketplace">Hardware Market</a></li>
-                    <li><a href="#internship">Incubator</a></li>
+                <ul class="task-list" id="task-list">
+                    <!-- Tasks will be dynamically injected here -->
                 </ul>
             </div>
-            <div class="footer-news-col">
-                <h4>Newsletter Protocol</h4>
-                <p>Subscribe to receive high-impact logs on firmware releases, robotics modules, and engineering updates.</p>
-                <div class="newsletter-form">
-                    <input type="email" placeholder="enter operational email" aria-label="Newsletter email">
-                    <button type="button" onclick="alert('Secure Subscription Route Authenticated.')"><i class="fa-solid fa-chevron-right"></i></button>
+
+            <!-- Focus Timer Card -->
+            <div class="card">
+                <h2>Pomodoro Focus Session</h2>
+                <div class="timer-display" id="timer">25:00</div>
+                <div class="timer-controls">
+                    <button class="btn-primary" id="start-btn" onclick="toggleTimer()">Start</button>
+                    <button style="background: transparent;" onclick="resetTimer()">Reset</button>
+                </div>
+            </div>
+
+            <!-- Simple Weekly Overview -->
+            <div class="card">
+                <h2>Weekly Block Schedule</h2>
+                <div class="schedule-grid">
+                    <div class="day-column"><div class="day-title">Mon</div><div class="schedule-item">Math Exam Prep</div></div>
+                    <div class="day-column"><div class="day-title">Tue</div><div class="schedule-item">Physics Lab</div></div>
+                    <div class="day-column"><div class="day-title">Wed</div><div class="schedule-item">History Essay</div></div>
+                    <div class="day-column"><div class="day-title">Thu</div><div class="schedule-item">Math Review</div></div>
+                    <div class="day-column"><div class="day-title">Fri</div><div class="schedule-item">Coding Project</div></div>
                 </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 SEA AUTO. All Rights Reserved. Designed for Maximum Efficiency.</p>
-        </div>
-    </footer>
 
-    <!-- Premium Framework Engines (GSAP, Particles, AOS) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script src="script.js"></script>
+        <!-- Personal Study Assistant Chat Panel -->
+        <div class="assistant-panel">
+            <div class="assistant-header">
+                <div class="avatar">AI</div>
+                <div>
+                    <h3 style="font-size: 1rem;">Study Companion</h3>
+                    <p style="font-size: 0.75rem; color: var(--success);">● Active & ready to quiz you</p>
+                </div>
+            </div>
+            
+            <div class="chat-messages" id="chat-messages">
+                <div class="message assistant">
+                    Hi there! I'm your personal study assistant. Need help breaking down a complex topic, creating a study schedule, or getting quizzed for your exams? Just let me know!
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Ask for a study tip, schedule advice..." onkeypress="handleChatKey(event)">
+                <button class="btn-primary" onclick="sendChatMessage()">Ask</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // --- Task Management Logic ---
+        const tasks = [
+            { id: 1, text: "Read Chapter 4 of Biology textbook", completed: false },
+            { id: 2, text: "Draft outline for History term paper", completed: true }
+        ];
+
+        function renderTasks() {
+            const list = document.getElementById('task-list');
+            list.innerHTML = '';
+            tasks.forEach(task => {
+                const li = document.createElement('li');
+                li.className = `task-item ${task.completed ? 'completed' : ''}`;
+                li.innerHTML = `
+                    <span onclick="toggleTask(${task.id})" style="cursor:pointer; flex:1;">
+                        ${task.completed ? '✓ ' : '○ '} ${task.text}
+                    </span>
+                    <button style="border:none; background:none; cursor:pointer; color:red;" onclick="deleteTask(${task.id})">✕</button>
+                `;
+                list.appendChild(li);
+            });
+        }
+
+        function addTask() {
+            const input = document.getElementById('task-input');
+            if (!input.value.trim()) return;
+            tasks.push({
+                id: Date.now(),
+                text: input.value.trim(),
+                completed: false
+            });
+            input.value = '';
+            renderTasks();
+        }
+
+        function toggleTask(id) {
+            const task = tasks.find(t => t.id === id);
+            if (task) task.completed = !task.completed;
+            renderTasks();
+        }
+
+        function deleteTask(id) {
+            const idx = tasks.findIndex(t => t.id === id);
+            if (idx !== -1) tasks.splice(idx, 1);
+            renderTasks();
+        }
+
+        // --- Pomodoro Timer Logic ---
+        let timerInterval;
+        let isRunning = false;
+        let timeLeft = 25 * 60; // 25 minutes in seconds
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function toggleTimer() {
+            const btn = document.getElementById('start-btn');
+            if (isRunning) {
+                clearInterval(timerInterval);
+                btn.textContent = 'Start';
+            } else {
+                timerInterval = setInterval(() => {
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        updateTimerDisplay();
+                    } else {
+                        clearInterval(timerInterval);
+                        alert("Time's up! Take a short break.");
+                        resetTimer();
+                    }
+                }, 1000);
+                btn.textContent = 'Pause';
+            }
+            isRunning = !isRunning;
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            isRunning = false;
+            timeLeft = 25 * 60;
+            updateTimerDisplay();
+            document.getElementById('start-btn').textContent = 'Start';
+        }
+
+        // --- Simulated AI Personal Assistant Logic ---
+        function handleChatKey(event) {
+            if (event.key === 'Enter') sendChatMessage();
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const messageText = input.value.trim();
+            if (!messageText) return;
+
+            // Append User Message
+            appendMessage(messageText, 'user');
+            input.value = '';
+
+            // Simulate AI response delay
+            setTimeout(() => {
+                const aiResponse = generateAssistantResponse(messageText);
+                appendMessage(aiResponse, 'assistant');
+            }, 800);
+        }
+
+        function appendMessage(text, sender) {
+            const container = document.getElementById('chat-messages');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${sender}`;
+            msgDiv.textContent = text;
+            container.appendChild(msgDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function generateAssistantResponse(input) {
+            const lowerInput = input.toLowerCase();
+            
+            if (lowerInput.includes('hello') || lowerInput.includes('hi')) {
+                return "Hello! Ready to smash your goals today? Tell me what subject you're tackling.";
+            }
+            if (lowerInput.includes('math') || lowerInput.includes('calculus')) {
+                return "Math requires deliberate practice! I recommend starting a 25-minute Pomodoro session right now to do 5 practice problems without distractions.";
+            }
+            if (lowerInput.includes('tired') || lowerInput.includes('break')) {
+                return "Burnout is real. If you've finished a focus block, step away from screens for 5 minutes, stretch, and grab some water!";
+            }
+            if (lowerInput.includes('exam') || lowerInput.includes('test')) {
+                return "For your upcoming exams, try 'Active Recall'. Instead of just reading, close the book and write down everything you remember from scratch.";
+            }
+            
+            return "Got it! I've added that to your active focus notes. Let's make sure we hit your goals on your task list today.";
+        }
+
+        // Initial setup run
+        renderTasks();
+    </script>
 </body>
-</html>                      
+</html>
