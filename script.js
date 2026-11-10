@@ -1,88 +1,76 @@
-/* --- FLAGSHIP DATA ENGINE (NO PLACEHOLDERS) --- */
+
+/* ==========================================
+   SEA AUTO - MAIN JAVASCRIPT
+   Vision Towards Automation
+   ========================================== */
+
+const SEA_CONFIG = {
+    email: "contact.seaauto23@gmail.com",
+    phone: "918298355455",
+    whatsapp: "https://wa.me/918298355455"
+};
+
+/* PRODUCT & SERVICE CATALOG */
 const SEA_PRODUCTS = [
     {
-        id: "prod-1",
-        title: "Smart Irrigation System",
+        id: "product-1",
+        title: "AutoFarm - Smart Irrigation System",
         category: "systems",
-        price: "₹8,499",
-        tag: "Flagship Hardware",
-        desc: "Closed-loop automated micro-agricultural array tracking automated moisture control matrix configurations dynamically."
+        tag: "AgriTech",
+        desc: "Smart irrigation solution using soil moisture sensing and automated water control."
     },
     {
-        id: "prod-2",
-        title: "NeuroLeaf Processing Node",
+        id: "product-2",
+        title: "NeuroLeaf - Plant Interaction Device",
         category: "systems",
-        price: "₹14,299",
-        tag: "AI Edge Device",
-        desc: "High-throughput local neural computing framework for plant structural data tracking and anomaly prediction."
+        tag: "Research Project",
+        desc: "An experimental electronics project exploring plant-related sensor data and interactive feedback."
     },
     {
-        id: "prod-3",
-        title: "Robotics Core Kit",
+        id: "product-3",
+        title: "Robotics & STEM Projects",
         category: "systems",
-        price: "₹6,199",
-        tag: "Educational Core",
-        desc: "Complete production-ready multi-axis micro-chassis structure alongside motor logic drivers."
+        tag: "STEM Education",
+        desc: "Hands-on robotics, electronics and automation projects for students and learning institutions."
     },
     {
-        id: "prod-4",
-        title: "Arduino UNO Compatible Rev3",
+        id: "product-4",
+        title: "IoT & Automation Solutions",
+        category: "systems",
+        tag: "IoT",
+        desc: "Custom electronics and connected-device prototypes for practical automation requirements."
+    },
+    {
+        id: "product-5",
+        title: "Electronics Components",
         category: "components",
-        price: "₹649",
-        tag: "Microcontrollers",
-        desc: "Industrial-grade ATmega328P development chip with high durability components."
+        tag: "Electronics",
+        desc: "Enquire about microcontrollers, sensors, modules and other electronics components."
     },
     {
-        id: "prod-5",
-        title: "ESP32 Wi-Fi + BT Module",
-        category: "components",
-        price: "₹899",
-        tag: "Wireless Node",
-        desc: "Dual-core computing layout offering scalable wireless automation networks."
-    },
-    {
-        id: "prod-6",
-        title: "Precision Sensor Pack",
-        category: "components",
-        price: "₹2,499",
-        tag: "Sensor Array",
-        desc: "Calibrated system tracking atmospheric thermal indexes, pressure vectors, and moisture coefficients."
-    },
-    {
-        id: "prod-7",
-        title: "Custom Prototyping PCB Matrix",
-        category: "components",
-        price: "₹450",
-        tag: "Circuit Logic",
-        desc: "Multi-layer fiberglass execution surface built for rapid algorithmic signal paths."
-    },
-    {
-        id: "prod-8",
-        title: "Industrial 3D Printed Housing",
-        category: "components",
-        price: "₹1,200",
-        tag: "Hardware Armor",
-        desc: "High-grade carbon-fiber reinforced shell engineered for intense mechanical protection."
-    },
-    {
-        id: "prod-9",
-        title: "Automation System Architecture Blueprint",
+        id: "product-6",
+        title: "3D Printing & Prototyping",
         category: "digital",
-        price: "₹3,500",
-        tag: "Project Report",
-        desc: "Extensive industrial deployment document incorporating compliance and validation matrices."
+        tag: "3D Design",
+        desc: "Discuss 3D design, printed enclosures and prototype development requirements."
     },
     {
-        id: "prod-10",
-        title: "Parametric Rover Chassis STL Node",
-        category: "digital",
-        price: "₹1,850",
-        tag: "STL Vector Asset",
-        desc: "Production-ready geometric 3D vector structural blueprint optimized for high mechanical yield."
+        id: "product-7",
+        title: "Student Project Development",
+        category: "systems",
+        tag: "Project Support",
+        desc: "Practical guidance and development support for electronics, IoT and robotics projects."
+    },
+    {
+        id: "product-8",
+        title: "Custom Electronics Solutions",
+        category: "components",
+        tag: "Custom Development",
+        desc: "Discuss your electronics design, circuit development and hardware requirements."
     }
 ];
 
-/* --- INITIALIZATION ORCHESTRATOR --- */
+/* INITIALIZATION */
 document.addEventListener("DOMContentLoaded", () => {
     initializeParticles();
     renderProducts(SEA_PRODUCTS);
@@ -92,243 +80,404 @@ document.addEventListener("DOMContentLoaded", () => {
     setupFaqAccordion();
     initializeCounters();
     setupMouseGlow();
-    
-    // Initialize AOS Animation Engine
-    AOS.init({
-        duration: 1000,
-        once: true,
-        offset: 120
-    });
+    setupInquiryForm();
+    setupCurrentYear();
+
+    if (typeof AOS !== "undefined") {
+        AOS.init({
+            duration: 900,
+            once: true,
+            offset: 100
+        });
+    }
 });
 
-/* --- PREMIUM INTERACTIVE MOUSE GLOW --- */
-function setupMouseGlow() {
-    const glow = document.querySelector('.custom-cursor-glow');
-    window.addEventListener('mousemove', (e) => {
-        gsap.to(glow, {
-            x: e.clientX,
-            y: e.clientY,
-            duration: 0.3,
-            ease: "power2.out"
-        });
-    });
-}
-
-/* --- PARTICLES.JS BACKGROUND PARAMETERS --- */
+/* PARTICLE BACKGROUND */
 function initializeParticles() {
+    if (typeof particlesJS === "undefined") return;
+
+    const particleElement = document.getElementById("particles-js");
+    if (!particleElement) return;
+
     particlesJS("particles-js", {
-        "particles": {
-            "number": { "value": 60, "density": { "enable": true, "value_area": 1000 } },
-            "color": { "value": "#3b82f6" },
-            "shape": { "type": "circle" },
-            "opacity": { "value": 0.25, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
-            "size": { "value": 3, "random": true, "anim": { "enable": false } },
-            "line_linked": { "enable": true, "distance": 180, "color": "#06b6d4", "opacity": 0.12, "width": 1 },
-            "move": { "enable": true, "speed": 1.2, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
+        particles: {
+            number: {
+                value: 45,
+                density: {
+                    enable: true,
+                    value_area: 1000
+                }
+            },
+            color: {
+                value: "#3b82f6"
+            },
+            shape: {
+                type: "circle"
+            },
+            opacity: {
+                value: 0.25,
+                random: true
+            },
+            size: {
+                value: 3,
+                random: true
+            },
+            line_linked: {
+                enable: true,
+                distance: 150,
+                color: "#06b6d4",
+                opacity: 0.15,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 1.2,
+                direction: "none",
+                random: true,
+                straight: false,
+                out_mode: "out"
+            }
         },
-        "interactivity": {
-            "detect_on": "canvas",
-            "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": false }, "resize": true },
-            "modes": { "grab": { "distance": 200, "line_linked": { "opacity": 0.3 } } }
+        interactivity: {
+            detect_on: "canvas",
+            events: {
+                onhover: {
+                    enable: true,
+                    mode: "grab"
+                },
+                onclick: {
+                    enable: false
+                },
+                resize: true
+            }
         },
-        "retina_detect": true
+        retina_detect: true
     });
 }
 
-/* --- PRODUCT EFFICIENT RENDERING ENGINE --- */
+/* MOUSE GLOW EFFECT */
+function setupMouseGlow() {
+    const glow = document.querySelector(".custom-cursor-glow");
+
+    if (!glow || window.matchMedia("(max-width: 768px)").matches) {
+        return;
+    }
+
+    window.addEventListener("mousemove", (event) => {
+        if (typeof gsap !== "undefined") {
+            gsap.to(glow, {
+                x: event.clientX,
+                y: event.clientY,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        } else {
+            glow.style.left = event.clientX + "px";
+            glow.style.top = event.clientY + "px";
+        }
+    });
+}
+
+/* PRODUCT DISPLAY */
 function renderProducts(productsList) {
     const container = document.getElementById("products-container");
-    if(!container) return;
-    
+
+    if (!container) return;
+
     container.innerHTML = "";
-    
-    if(productsList.length === 0) {
+
+    if (!productsList.length) {
         container.innerHTML = `
-            <div class="glass-panel" style="grid-column: 1/-1; padding: 40px; text-align: center; color: var(--text-muted);">
-                <i class="fa-solid fa-ban" style="font-size: 2rem; margin-bottom: 10px; color: var(--accent-cyan);"></i>
-                <p>No system units match your current filter matrix query.</p>
+            <div class="glass-panel"
+                 style="grid-column:1/-1;padding:35px;text-align:center;">
+                <p>No matching products or services found.</p>
             </div>
         `;
         return;
     }
-    
-    productsList.forEach(product => {
-        const waLink = `https://wa.me/919123456789?text=Hello%20SEA%20AUTO%27s%20Ecosystem%20Desk%2C%20I%20wish%20to%20place%20an%20order%20for%20the%20following%20hardware%20node%3A%20${encodeURIComponent(product.title)}%20(${product.price})`;
-        
+
+    productsList.forEach((product) => {
+        const message = `Hello SEA AUTO, I would like to enquire about ${product.title}. Please share the details.`;
+
+        const whatsappLink =
+            `${SEA_CONFIG.whatsapp}?text=${encodeURIComponent(message)}`;
+
         const card = document.createElement("div");
+
         card.className = "product-card glass-panel";
         card.setAttribute("data-aos", "fade-up");
+
         card.innerHTML = `
             <div class="prod-img-box">
                 <span class="prod-tag">${product.tag}</span>
-                <div class="prod-placeholder-icon"><i class="fa-solid fa-microchip"></i></div>
+                <div class="prod-placeholder-icon">
+                    <i class="fa-solid fa-microchip"></i>
+                </div>
             </div>
+
             <div class="prod-info">
                 <h4>${product.title}</h4>
+
                 <p>${product.desc}</p>
+
                 <div class="prod-pricing-row">
-                    <span class="prod-price">${product.price}</span>
+                    <span class="prod-price">Contact for Details</span>
                 </div>
+
                 <div class="prod-action-row">
-                    <a href="#contact" class="btn-buy-now" onclick="routeToInquiry('${product.title}')">Acquire Node</a>
-                    <a href="${waLink}" target="_blank" class="btn-wa-order" aria-label="Order via WhatsApp Link"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#inquiry"
+                       class="btn-buy-now"
+                       onclick="routeToInquiry('${product.id}')">
+                       Enquire Now
+                    </a>
+
+                    <a href="${whatsappLink}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="btn-wa-order"
+                       aria-label="Enquire on WhatsApp">
+                       <i class="fa-brands fa-whatsapp"></i>
+                    </a>
                 </div>
             </div>
         `;
+
         container.appendChild(card);
     });
 }
 
-/* --- SEARCH & FILTER LOGIC PIPELINE --- */
+/* SEARCH AND FILTER */
 function setupMarketplaceFilters() {
     const searchInput = document.getElementById("product-search");
     const filterButtons = document.querySelectorAll(".filter-btn");
-    
+
     let activeCategory = "all";
     let searchQuery = "";
-    
-    function filterExecution() {
-        const filtered = SEA_PRODUCTS.filter(product => {
-            const matchesCategory = (activeCategory === "all" || product.category === activeCategory);
-            const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                                  product.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                                  product.tag.toLowerCase().includes(searchQuery.toLowerCase());
+
+    function filterProducts() {
+        const filteredProducts = SEA_PRODUCTS.filter((product) => {
+            const matchesCategory =
+                activeCategory === "all" ||
+                product.category === activeCategory;
+
+            const searchableText =
+                `${product.title} ${product.desc} ${product.tag}`.toLowerCase();
+
+            const matchesSearch =
+                searchableText.includes(searchQuery.toLowerCase());
+
             return matchesCategory && matchesSearch;
         });
-        renderProducts(filtered);
+
+        renderProducts(filteredProducts);
     }
-    
-    if(searchInput) {
-        searchInput.addEventListener("input", (e) => {
-            searchQuery = e.target.value;
-            filterExecution();
+
+    if (searchInput) {
+        searchInput.addEventListener("input", (event) => {
+            searchQuery = event.target.value.trim();
+            filterProducts();
         });
     }
-    
-    filterButtons.forEach(btn => {
-        btn.addEventListener("click", () => {
-            filterButtons.forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
-            activeCategory = btn.getAttribute("data-filter");
-            filterExecution();
+
+    filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            filterButtons.forEach((item) => {
+                item.classList.remove("active");
+            });
+
+            button.classList.add("active");
+
+            activeCategory = button.getAttribute("data-filter");
+            filterProducts();
         });
     });
 }
 
-/* --- MOBILE RESPONSIVE HAMBURGER NAVIGATION --- */
+/* MOBILE NAVIGATION */
 function setupMobileNavigation() {
     const hamburger = document.querySelector(".hamburger");
     const navMenu = document.querySelector(".nav-menu");
     const navLinks = document.querySelectorAll(".nav-link");
-    
-    if(!hamburger) return;
-    
+
+    if (!hamburger || !navMenu) return;
+
     hamburger.addEventListener("click", () => {
         hamburger.classList.toggle("active");
         navMenu.classList.toggle("active");
     });
-    
-    navLinks.forEach(link => {
+
+    navLinks.forEach((link) => {
         link.addEventListener("click", () => {
             hamburger.classList.remove("active");
             navMenu.classList.remove("active");
-            
-            navLinks.forEach(l => l.classList.remove("active"));
+
+            navLinks.forEach((item) => {
+                item.classList.remove("active");
+            });
+
             link.classList.add("active");
         });
     });
 }
 
-/* --- SCROLL ANIMATION & HEADER STICKY EFFECTS --- */
+/* SCROLL EFFECTS */
 function setupScrollEffects() {
     const navbar = document.querySelector(".navbar");
-    
+
     window.addEventListener("scroll", () => {
-        if(window.scrollY > 50) {
-            navbar.classList.add("scrolled");
-        } else {
-            navbar.classList.remove("scrolled");
+        if (navbar) {
+            navbar.classList.toggle("scrolled", window.scrollY > 50);
         }
-        
-        // Dynamic active menu update based on coordinates
+
         const sections = document.querySelectorAll("section");
-        const scrollPos = window.scrollY + 150;
-        
-        sections.forEach(section => {
-            if(scrollPos >= section.offsetTop && scrollPos < (section.offsetTop + section.offsetHeight)) {
+        const scrollPosition = window.scrollY + 150;
+
+        sections.forEach((section) => {
+            if (
+                scrollPosition >= section.offsetTop &&
+                scrollPosition < section.offsetTop + section.offsetHeight
+            ) {
                 const currentId = section.getAttribute("id");
-                document.querySelectorAll(".nav-link").forEach(link => {
-                    link.classList.remove("active");
-                    if(link.getAttribute("href") === `#${currentId}`) {
-                        link.classList.add("active");
-                    }
+
+                document.querySelectorAll(".nav-link").forEach((link) => {
+                    link.classList.toggle(
+                        "active",
+                        link.getAttribute("href") === `#${currentId}`
+                    );
                 });
             }
         });
     });
 }
 
-/* --- FAQ CORE ACCORDION MATRIX CONTROL --- */
+/* FAQ ACCORDION */
 function setupFaqAccordion() {
-    const items = document.querySelectorAll(".accordion-item");
-    items.forEach(item => {
-        item.addEventListener("click", () => {
-            const isOpen = item.classList.contains("open");
-            items.forEach(i => i.classList.remove("open"));
-            if(!isOpen) {
+    const accordionItems = document.querySelectorAll(".accordion-item");
+
+    accordionItems.forEach((item) => {
+        const title = item.querySelector(".accordion-title");
+
+        if (!title) return;
+
+        title.addEventListener("click", () => {
+            const wasOpen = item.classList.contains("open");
+
+            accordionItems.forEach((otherItem) => {
+                otherItem.classList.remove("open");
+            });
+
+            if (!wasOpen) {
                 item.classList.add("open");
             }
         });
     });
 }
 
-/* --- AUTOMATED DATA COUNTER ECOSYSTEM --- */
+/* ANIMATED COUNTERS */
 function initializeCounters() {
     const counters = document.querySelectorAll(".counter");
-    
-    const countObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting) {
-                const target = entry.target;
-                const targetLimit = parseInt(target.getAttribute("data-target"), 10);
-                let currentCount = 0;
-                const incrementSpeed = Math.ceil(targetLimit / 50);
-                
-                const updateCounter = () => {
-                    currentCount += incrementSpeed;
-                    if(currentCount >= targetLimit) {
-                        target.innerText = targetLimit;
-                    } else {
-                        target.innerText = currentCount;
-                        setTimeout(updateCounter, 30);
-                    }
-                };
-                updateCounter();
-                observer.unobserve(target);
+
+    if (!counters.length || !("IntersectionObserver" in window)) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+
+            const counter = entry.target;
+            const target = Number(counter.getAttribute("data-target")) || 0;
+
+            // Only animate counters with a valid, confirmed target.
+            let current = 0;
+            const step = Math.max(1, Math.ceil(target / 50));
+
+            function updateCounter() {
+                current = Math.min(current + step, target);
+                counter.textContent = current;
+
+                if (current < target) {
+                    setTimeout(updateCounter, 30);
+                }
             }
+
+            updateCounter();
+            observer.unobserve(counter);
         });
-    }, { threshold: 0.5 });
-    
-    counters.forEach(counter => countObserver.observe(counter));
+    }, {
+        threshold: 0.5
+    });
+
+    counters.forEach((counter) => observer.observe(counter));
 }
 
-/* --- SECURE ROUTING FROM CARDS TO INQUIRY --- */
-function routeToInquiry(productName) {
+/* PRODUCT TO INQUIRY FORM */
+function routeToInquiry(productId) {
+    const product = SEA_PRODUCTS.find((item) => item.id === productId);
+
     const intentDropdown = document.getElementById("form-intent");
     const messageTextarea = document.getElementById("form-msg");
-    
-    if(intentDropdown && messageTextarea) {
+
+    if (intentDropdown) {
         intentDropdown.value = "product";
-        messageTextarea.value = `SECURE REQUEST TRANSMISSION:\nI wish to negotiate terms regarding procurement for: ${productName}.\nPlease communicate logistics and scaling timelines directly.`;
+    }
+
+    if (messageTextarea && product) {
+        messageTextarea.value =
+            `Hello SEA AUTO,\n\nI am interested in: ${product.title}.\nPlease share more details.`;
     }
 }
 
-/* --- FORM DATA SECURE TRANSMISSION SIMULATION --- */
+/* INQUIRY FORM - EMAIL DRAFT */
+function setupInquiryForm() {
+    const form = document.getElementById("sea-inquiry-form");
+
+    if (!form) return;
+
+    form.addEventListener("submit", handleInquirySubmit);
+}
+
 function handleInquirySubmit(event) {
     event.preventDefault();
-    const name = document.getElementById("form-name").value;
-    const email = document.getElementById("form-email").value;
-    
-    alert(`TRANSMISSION COMPLETION PROCESSED.\n\nThank you, ${name}. Your request parameters have been cataloged into our central data cluster. Our team will contact you at ${email} shortly.`);
-    document.getElementById("sea-inquiry-form").reset();
+
+    const name = document.getElementById("form-name")?.value.trim();
+    const email = document.getElementById("form-email")?.value.trim();
+    const intent = document.getElementById("form-intent")?.value;
+    const message = document.getElementById("form-msg")?.value.trim();
+
+    if (!name || !email || !intent || !message) {
+        alert("Please complete all required fields.");
+        return;
+    }
+
+    const subject = `SEA AUTO Website Inquiry - ${intent}`;
+
+    const body = `
+Name: ${name}
+Email: ${email}
+Inquiry Type: ${intent}
+
+Message:
+${message}
+
+Sent through SEA AUTO website.
+    `.trim();
+
+    const mailtoLink =
+        `mailto:${SEA_CONFIG.email}` +
+        `?subject=${encodeURIComponent(subject)}` +
+        `&body=${encodeURIComponent(body)}`;
+
+    alert(
+        "Your email application will open with your inquiry details. Please send the email to complete your enquiry."
+    );
+
+    window.location.href = mailtoLink;
+}
+
+/* FOOTER YEAR */
+function setupCurrentYear() {
+    const yearElement = document.getElementById("current-year");
+
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+    }
 }
