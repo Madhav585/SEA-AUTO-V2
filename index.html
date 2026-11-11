@@ -4,202 +4,218 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#07111f">
 
   <title>SEA AUTO | Vision Towards Automation</title>
-  <meta name="description" content="SEA AUTO is a technology initiative based in Begusarai, Bihar, exploring automation, IoT, AgriTech, robotics and electronics.">
-  <meta name="keywords" content="SEA AUTO, Automation, IoT, AgriTech, Robotics, Electronics, STEM Education, Begusarai">
+
+  <meta name="description" content="SEA AUTO is an emerging technology initiative focused on automation, IoT, AgriTech, robotics, electronics and STEM education.">
+  <meta name="keywords" content="SEA AUTO, Automation, IoT, AgriTech, Robotics, Electronics, STEM Education, Begusarai Bihar">
+  <meta name="author" content="SEA AUTO">
 
   <meta property="og:title" content="SEA AUTO | Vision Towards Automation">
-  <meta property="og:description" content="Exploring practical technology through automation, IoT, AgriTech and robotics.">
+  <meta property="og:description" content="Exploring technology through automation, IoT, AgriTech, robotics and STEM education.">
   <meta property="og:type" content="website">
+
+  <meta name="theme-color" content="#071426">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <div class="background-glow"></div>
-  <div class="particles" id="particles"></div>
-
   <!-- Navigation -->
-  <header class="navbar">
-    <div class="nav-container">
+  <header class="header" id="top">
+    <nav class="navbar container">
 
-      <a href="#home" class="logo" aria-label="SEA AUTO Home">
-        <span class="logo-mark">SEA</span>
-        <span class="logo-text">
+      <a href="#home" class="brand">
+        <span class="brand-icon">S</span>
+        <span class="brand-text">
           <strong>SEA AUTO</strong>
-          <small>VISION TOWARDS AUTOMATION</small>
+          <small>Vision Towards Automation</small>
         </span>
       </a>
 
-      <nav class="nav-menu" id="nav-menu">
-        <a href="#home" class="nav-link">Home</a>
-        <a href="#about" class="nav-link">About</a>
-        <a href="#solutions" class="nav-link">Solutions</a>
-        <a href="#projects" class="nav-link">Projects</a>
-        <a href="#education" class="nav-link">Education</a>
-        <a href="#team" class="nav-link">Team</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </nav>
-
-      <a href="#contact" class="nav-cta">Let's Connect ↗</a>
-
-      <button class="hamburger" id="hamburger"
-              aria-label="Toggle navigation"
-              aria-controls="nav-menu"
-              aria-expanded="false">
-        <span></span><span></span><span></span>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
 
-    </div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#solutions">Solutions</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#journey">Our Journey</a></li>
+        <li><a href="#team">Leadership</a></li>
+        <li><a href="#contact" class="nav-contact">Contact Us</a></li>
+      </ul>
+
+    </nav>
   </header>
+
 
   <main>
 
-    <!-- Hero -->
-    <section class="hero-section" id="home">
-      <div class="hero-content">
+    <!-- Hero Section -->
+    <section class="hero" id="home">
 
-        <div class="hero-badge">
+      <div class="hero-glow glow-one"></div>
+      <div class="hero-glow glow-two"></div>
+
+      <div class="container hero-content">
+
+        <div class="hero-label">
           <span class="status-dot"></span>
-          INNOVATION • ELECTRONICS • AUTOMATION
+          TECHNOLOGY • INNOVATION • ENGINEERING
         </div>
 
         <h1>
           Building Ideas Into
-          <span class="gradient-text">Intelligent Solutions.</span>
+          <span class="gradient-text">Smart Solutions.</span>
         </h1>
 
+        <h2 class="hero-brand">SEA AUTO</h2>
+
+        <p class="hero-tagline">Vision Towards Automation</p>
+
         <p class="hero-description">
-          SEA AUTO explores practical technology through automation,
-          IoT, AgriTech, robotics and electronics. We believe in
-          learning by building and creating solutions for real-world challenges.
+          Exploring practical technology solutions through automation,
+          IoT, AgriTech, robotics and electronics — with a vision to make
+          technology useful, accessible and impactful.
         </p>
 
         <div class="hero-buttons">
-          <a href="#projects" class="btn btn-primary">Explore Projects →</a>
-          <a href="#about" class="btn btn-secondary">Discover SEA AUTO</a>
+          <a href="#solutions" class="btn btn-primary">Explore Our Solutions <span>→</span></a>
+          <a href="#about" class="btn btn-outline">Discover SEA AUTO</a>
         </div>
 
-        <p class="hero-location">⌖ Begusarai, Bihar, India</p>
+        <div class="hero-focus">
+          <span>Automation</span>
+          <i></i>
+          <span>IoT</span>
+          <i></i>
+          <span>AgriTech</span>
+          <i></i>
+          <span>Robotics</span>
+          <i></i>
+          <span>STEM Education</span>
+        </div>
 
       </div>
 
-      <div class="hero-visual">
-        <div class="hero-orbit orbit-one"></div>
-        <div class="hero-orbit orbit-two"></div>
-
-        <div class="hero-center">
-          <div class="hero-center-inner">
-            <span class="hero-symbol">SEA</span>
-            <span class="hero-symbol-sub">AUTO</span>
-            <span class="hero-symbol-line"></span>
-            <small>VISION TOWARDS AUTOMATION</small>
-          </div>
-        </div>
-
-        <div class="floating-card card-one">
-          <span>⚡</span>
-          <div><strong>Automation</strong><small>Smart Systems</small></div>
-        </div>
-
-        <div class="floating-card card-two">
-          <span>🌱</span>
-          <div><strong>AgriTech</strong><small>Smart Agriculture</small></div>
-        </div>
-
-        <div class="floating-card card-three">
-          <span>🤖</span>
-          <div><strong>Robotics</strong><small>Practical Learning</small></div>
-        </div>
-      </div>
+      <div class="hero-bottom-line"></div>
     </section>
+
 
     <!-- Focus Areas -->
     <section class="focus-section">
-      <div class="section-container focus-grid">
+      <div class="container">
 
-        <article class="focus-item">
-          <span class="focus-icon">⚙️</span>
-          <h3>Automation</h3>
-          <p>Practical automation concepts and systems.</p>
-        </article>
+        <div class="section-heading">
+          <span class="section-label">OUR FOCUS</span>
+          <h2>Technology Areas We <span class="gradient-text">Explore</span></h2>
+          <p>Connecting engineering concepts with practical applications.</p>
+        </div>
 
-        <article class="focus-item">
-          <span class="focus-icon">📡</span>
-          <h3>IoT & Electronics</h3>
-          <p>Connected devices and electronic solutions.</p>
-        </article>
+        <div class="focus-grid">
 
-        <article class="focus-item">
-          <span class="focus-icon">🌿</span>
-          <h3>AgriTech</h3>
-          <p>Technology-driven agricultural ideas.</p>
-        </article>
+          <article class="focus-card">
+            <div class="focus-icon">⚙️</div>
+            <h3>Automation</h3>
+            <p>Exploring intelligent control systems and automated processes.</p>
+          </article>
 
-        <article class="focus-item">
-          <span class="focus-icon">🤖</span>
-          <h3>Robotics</h3>
-          <p>Robotics projects and hands-on learning.</p>
-        </article>
+          <article class="focus-card">
+            <div class="focus-icon">📡</div>
+            <h3>Internet of Things</h3>
+            <p>Connecting devices, sensors and systems through IoT technologies.</p>
+          </article>
 
+          <article class="focus-card">
+            <div class="focus-icon">🌱</div>
+            <h3>AgriTech</h3>
+            <p>Developing technology concepts for smart and efficient agriculture.</p>
+          </article>
+
+          <article class="focus-card">
+            <div class="focus-icon">🤖</div>
+            <h3>Robotics</h3>
+            <p>Experimenting with robotics, electronics and intelligent systems.</p>
+          </article>
+
+          <article class="focus-card">
+            <div class="focus-icon">💡</div>
+            <h3>Electronics</h3>
+            <p>Building practical electronic prototypes and embedded solutions.</p>
+          </article>
+
+          <article class="focus-card">
+            <div class="focus-icon">🎓</div>
+            <h3>STEM Education</h3>
+            <p>Encouraging hands-on learning, innovation and technical skills.</p>
+          </article>
+
+        </div>
       </div>
     </section>
 
-    <!-- About -->
-    <section class="section" id="about">
-      <div class="section-container">
 
-        <div class="section-heading">
+    <!-- About Section -->
+    <section class="section" id="about">
+      <div class="container about-grid">
+
+        <div class="about-content">
           <span class="section-label">ABOUT SEA AUTO</span>
-          <h2>Technology With a <span class="gradient-text">Purpose.</span></h2>
-          <p>From student innovation to practical technology development.</p>
+
+          <h2>
+            Turning Engineering Ideas Into
+            <span class="gradient-text">Practical Possibilities.</span>
+          </h2>
+
+          <p>
+            SEA AUTO is an emerging technology initiative based in
+            Begusarai, Bihar, India. It focuses on exploring and developing
+            technology-driven concepts in automation, electronics,
+            Internet of Things, AgriTech and robotics.
+          </p>
+
+          <p>
+            Started as a student project in 2022, SEA AUTO continues to
+            explore practical engineering ideas through experimentation,
+            prototype development and technology education.
+          </p>
+
+          <p>
+            Our approach is centred on learning, innovation and creating
+            solutions that address real-world challenges.
+          </p>
+
+          <a href="#contact" class="text-link">Connect with SEA AUTO →</a>
         </div>
 
-        <div class="about-grid">
-          <div class="about-content">
-            <h3>Our Story</h3>
-
-            <p>
-              SEA AUTO started in 2022 as a student initiative with an
-              interest in electronics, technology and automation.
-              What began as a learning project has grown into an effort
-              to explore practical solutions for everyday challenges.
-            </p>
-
-            <p>
-              Based in Begusarai, Bihar, we explore smart agriculture,
-              IoT devices, robotics, electronics and STEM education.
-              Our approach is simple: understand a problem, experiment
-              with technology and build working prototypes.
-            </p>
-
-            <p>
-              We aim to make technology learning accessible and encourage
-              students to turn ideas into practical projects.
-            </p>
-
-            <a href="#contact" class="text-link">Connect With Us →</a>
+        <div class="about-visual">
+          <div class="visual-main">
+            <div class="visual-circle">
+              <span>SEA</span>
+              <strong>AUTO</strong>
+            </div>
+            <div class="orbit orbit-one"></div>
+            <div class="orbit orbit-two"></div>
+            <span class="orbit-dot dot-one"></span>
+            <span class="orbit-dot dot-two"></span>
+            <span class="orbit-dot dot-three"></span>
           </div>
 
-          <div class="about-visual">
-            <div class="about-visual-card">
-              <div class="about-icon">⚡</div>
-              <h3>SEA AUTO</h3>
-              <p>Vision Towards Automation</p>
-              <div class="about-divider"></div>
-              <div class="about-points">
-                <span>✓ Learn</span>
-                <span>✓ Experiment</span>
-                <span>✓ Build</span>
-                <span>✓ Innovate</span>
-              </div>
+          <div class="visual-caption">
+            <span class="caption-icon">✦</span>
+            <div>
+              <strong>Vision Towards Automation</strong>
+              <small>Ideas • Innovation • Engineering</small>
             </div>
           </div>
         </div>
@@ -207,253 +223,303 @@
       </div>
     </section>
 
-    <!-- Solutions -->
+
+    <!-- Solutions Section -->
     <section class="section alternate-section" id="solutions">
-      <div class="section-container">
+      <div class="container">
 
         <div class="section-heading">
-          <span class="section-label">WHAT WE EXPLORE</span>
-          <h2>Our <span class="gradient-text">Solutions & Services.</span></h2>
-          <p>Explore our areas of work, concepts and technology-based solutions.</p>
+          <span class="section-label">WHAT WE DO</span>
+          <h2>Our Technology <span class="gradient-text">Solutions</span></h2>
+          <p>Exploring technology across multiple engineering domains.</p>
         </div>
 
-        <div class="filter-bar">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="agritech">AgriTech</button>
-          <button class="filter-btn" data-filter="automation">Automation</button>
-          <button class="filter-btn" data-filter="iot">IoT</button>
-          <button class="filter-btn" data-filter="education">Education</button>
-        </div>
+        <div class="solutions-grid">
 
-        <div class="products-grid" id="products-container">
-
-          <article class="product-card" data-category="agritech">
-            <div class="product-icon">🌱</div>
-            <span class="product-category">AGRITECH</span>
-            <h3>Smart Irrigation</h3>
-            <p>Explore soil moisture-based watering and automated pump control.</p>
-            <a href="#contact" class="text-link">Enquire Now →</a>
+          <article class="solution-card">
+            <div class="solution-number">01</div>
+            <div class="solution-icon">🌾</div>
+            <h3>AutoFarm</h3>
+            <p class="solution-category">Smart Agriculture</p>
+            <p>
+              An agricultural technology initiative exploring smart
+              irrigation and sensor-based monitoring concepts.
+            </p>
+            <a href="#projects" class="text-link">Explore Project →</a>
           </article>
 
-          <article class="product-card" data-category="automation">
-            <div class="product-icon">⚙️</div>
-            <span class="product-category">AUTOMATION</span>
+          <article class="solution-card">
+            <div class="solution-number">02</div>
+            <div class="solution-icon">🌿</div>
+            <h3>NeuroLeaf</h3>
+            <p class="solution-category">Experimental Plant Technology</p>
+            <p>
+              An experimental project exploring plant-related sensor
+              data and interactive electronic feedback.
+            </p>
+            <a href="#projects" class="text-link">Explore Project →</a>
+          </article>
+
+          <article class="solution-card">
+            <div class="solution-number">03</div>
+            <div class="solution-icon">🔌</div>
             <h3>Automation Systems</h3>
-            <p>Electronic control systems and practical automation concepts.</p>
-            <a href="#contact" class="text-link">Enquire Now →</a>
+            <p class="solution-category">Electronics & IoT</p>
+            <p>
+              Exploring electronic control systems, embedded devices
+              and connected automation concepts.
+            </p>
+            <a href="#projects" class="text-link">Explore Projects →</a>
           </article>
 
-          <article class="product-card" data-category="iot">
-            <div class="product-icon">📡</div>
-            <span class="product-category">IOT</span>
-            <h3>IoT Projects</h3>
-            <p>Sensor-based projects and connected device experiments.</p>
-            <a href="#contact" class="text-link">Enquire Now →</a>
-          </article>
-
-          <article class="product-card" data-category="education">
-            <div class="product-icon">🎓</div>
-            <span class="product-category">EDUCATION</span>
-            <h3>STEM Learning</h3>
-            <p>Hands-on learning activities in electronics and technology.</p>
-            <a href="#contact" class="text-link">Enquire Now →</a>
-          </article>
-
-          <article class="product-card" data-category="education">
-            <div class="product-icon">🖨️</div>
-            <span class="product-category">EDUCATION</span>
-            <h3>3D Printing & Design</h3>
-            <p>Introduction to 3D design, prototyping and digital fabrication.</p>
-            <a href="#contact" class="text-link">Enquire Now →</a>
-          </article>
-
-          <article class="product-card" data-category="automation">
-            <div class="product-icon">🤖</div>
-            <span class="product-category">ROBOTICS</span>
-            <h3>Robotics Projects</h3>
-            <p>Explore robot mechanisms, sensors and embedded electronics.</p>
-            <a href="#contact" class="text-link">Enquire Now →</a>
+          <article class="solution-card">
+            <div class="solution-number">04</div>
+            <div class="solution-icon">🎓</div>
+            <h3>STEM & Technical Education</h3>
+            <p class="solution-category">Learning & Development</p>
+            <p>
+              Supporting practical learning through electronics,
+              robotics, tinkering and technology-based activities.
+            </p>
+            <a href="#education" class="text-link">Explore Education →</a>
           </article>
 
         </div>
-
-        <p class="section-note">
-          Product availability, specifications and pricing are shared after enquiry.
-        </p>
-
       </div>
     </section>
 
-    <!-- Projects -->
+
+    <!-- Projects Section -->
     <section class="section" id="projects">
-      <div class="section-container">
+      <div class="container">
 
         <div class="section-heading">
-          <span class="section-label">OUR WORK</span>
-          <h2>Ideas. Experiments. <span class="gradient-text">Projects.</span></h2>
-          <p>A look at selected projects and prototypes explored by SEA AUTO.</p>
+          <span class="section-label">INNOVATION PORTFOLIO</span>
+          <h2>Projects & <span class="gradient-text">Experiments</span></h2>
+          <p>Some of the engineering concepts and prototypes explored under SEA AUTO.</p>
         </div>
 
-        <div class="gallery-masonry">
+        <div class="projects-grid">
 
           <article class="project-card">
-            <div class="project-image project-autofarm">
-              <span class="project-emoji">🌱</span>
-              <span class="project-category">AGRITECH</span>
+            <div class="project-art art-green">
+              <span class="project-art-icon">🌱</span>
+              <span class="project-tag">AgriTech</span>
             </div>
             <div class="project-info">
+              <span class="project-type">SMART IRRIGATION</span>
               <h3>AutoFarm</h3>
               <p>
-                A smart irrigation project exploring soil moisture-based
-                watering and automated pump control.
+                A smart irrigation prototype exploring soil moisture
+                sensing and automated water management.
               </p>
-              <span class="project-tag">Smart Irrigation</span>
+              <div class="project-tech">
+                <span>Arduino</span>
+                <span>Sensors</span>
+                <span>Automation</span>
+              </div>
             </div>
           </article>
 
           <article class="project-card">
-            <div class="project-image project-neuroleaf">
-              <span class="project-emoji">🌿</span>
-              <span class="project-category">EXPERIMENTAL IOT</span>
+            <div class="project-art art-blue">
+              <span class="project-art-icon">🌿</span>
+              <span class="project-tag">Experimental</span>
             </div>
             <div class="project-info">
+              <span class="project-type">PLANT INTERACTION</span>
               <h3>NeuroLeaf</h3>
               <p>
-                An experimental plant interaction concept using sensors
-                and electronic output.
+                An experimental plant interaction device exploring
+                sensor inputs and audio-based feedback.
               </p>
-              <span class="project-tag">Plant Interaction</span>
+              <div class="project-tech">
+                <span>Arduino Uno</span>
+                <span>Sensors</span>
+                <span>Electronics</span>
+              </div>
             </div>
           </article>
 
           <article class="project-card">
-            <div class="project-image project-robot">
-              <span class="project-emoji">🤖</span>
-              <span class="project-category">ROBOTICS</span>
+            <div class="project-art art-orange">
+              <span class="project-art-icon">🤖</span>
+              <span class="project-tag">Robotics</span>
             </div>
             <div class="project-info">
+              <span class="project-type">SAFETY ROBOTICS</span>
               <h3>Fire-Fighting Robot</h3>
               <p>
-                A robotics prototype designed to detect flame and operate
-                a water-pumping mechanism.
+                A robotics prototype concept designed to explore flame
+                detection, motor control and water-based response.
               </p>
-              <span class="project-tag">Robotics & Electronics</span>
+              <div class="project-tech">
+                <span>Arduino</span>
+                <span>Motor Driver</span>
+                <span>Flame Sensor</span>
+              </div>
             </div>
           </article>
 
         </div>
 
-        <p class="section-note">
-          Project descriptions represent development and prototype work.
-          Features may vary by project version.
-        </p>
+        <div class="projects-note">
+          <span>✦</span>
+          <p>
+            Project descriptions represent development and experimental
+            work. Specifications may evolve during prototyping.
+          </p>
+        </div>
 
       </div>
     </section>
 
-    <!-- Education -->
+
+    <!-- Education Section -->
     <section class="section alternate-section" id="education">
-      <div class="section-container">
+      <div class="container">
 
         <div class="section-heading">
-          <span class="section-label">LEARN & CREATE</span>
-          <h2>Building Skills Through <span class="gradient-text">Technology.</span></h2>
-          <p>Encouraging practical learning, creativity and problem-solving.</p>
+          <span class="section-label">EDUCATION & SKILL DEVELOPMENT</span>
+          <h2>Learn. Build. <span class="gradient-text">Innovate.</span></h2>
+          <p>Encouraging practical technology learning and hands-on exploration.</p>
         </div>
 
         <div class="education-grid">
 
           <article class="education-card">
-            <div class="education-icon">🎓</div>
-            <h3>STEM Education</h3>
-            <p>Hands-on learning in science, technology, engineering and mathematics.</p>
-          </article>
-
-          <article class="education-card">
-            <div class="education-icon">🛠️</div>
-            <h3>Tinkering & Robotics</h3>
-            <p>Explore electronics, sensors, Arduino, robotics and prototypes.</p>
+            <div class="education-icon">🧪</div>
+            <h3>Tinkering Lab</h3>
+            <p>
+              Hands-on exploration of electronics, sensors, robotics
+              and creative engineering projects.
+            </p>
           </article>
 
           <article class="education-card">
             <div class="education-icon">🖨️</div>
             <h3>3D Printing</h3>
-            <p>Introduction to 3D design, prototyping and digital fabrication.</p>
+            <p>
+              Introduction to 3D design, digital modelling and
+              prototype development.
+            </p>
           </article>
 
           <article class="education-card">
             <div class="education-icon">💻</div>
-            <h3>Technical Training</h3>
-            <p>Learn programming, IoT concepts, electronics and practical skills.</p>
+            <h3>Technology Training</h3>
+            <p>
+              Exploring programming, electronics, IoT and
+              emerging technology skills.
+            </p>
+          </article>
+
+          <article class="education-card">
+            <div class="education-icon">🚀</div>
+            <h3>Innovation Projects</h3>
+            <p>
+              Encouraging students to transform ideas into
+              practical models and prototypes.
+            </p>
           </article>
 
         </div>
 
         <div class="education-cta">
-          <h3>Interested in learning with SEA AUTO?</h3>
-          <p>Contact us to discuss workshops, training and internship enquiries.</p>
-          <a href="#contact" class="btn btn-primary">Make an Enquiry →</a>
+          <div>
+            <h3>Interested in technology and innovation?</h3>
+            <p>Connect with SEA AUTO for training and collaboration enquiries.</p>
+          </div>
+          <a href="#contact" class="btn btn-primary">Get in Touch →</a>
         </div>
 
       </div>
     </section>
 
-    <!-- Journey -->
+
+    <!-- Journey Section -->
     <section class="section" id="journey">
-      <div class="section-container">
+      <div class="container">
 
         <div class="section-heading">
           <span class="section-label">OUR JOURNEY</span>
-          <h2>Learning, Building & <span class="gradient-text">Growing.</span></h2>
+          <h2>From an Idea to <span class="gradient-text">Innovation.</span></h2>
+          <p>A journey driven by curiosity, learning and engineering.</p>
         </div>
 
-        <div class="journey-grid">
-          <article class="journey-card">
-            <span class="journey-year">2022</span>
-            <h3>The Beginning</h3>
-            <p>SEA AUTO began as a student initiative focused on electronics and automation.</p>
-          </article>
+        <div class="journey-list">
 
-          <article class="journey-card">
-            <span class="journey-year">2023</span>
-            <h3>Innovation Activities</h3>
-            <p>Participation in activities including Bihar Innovation Challenge and Smart Bihar Hackathon.</p>
-          </article>
+          <div class="journey-item">
+            <div class="journey-marker"></div>
+            <div class="journey-content">
+              <span class="journey-date">2022</span>
+              <h3>The Beginning</h3>
+              <p>
+                SEA AUTO started as a student project with an interest
+                in electronics, automation and practical technology.
+              </p>
+            </div>
+          </div>
 
-          <article class="journey-card">
-            <span class="journey-year">Today</span>
-            <h3>Exploring New Ideas</h3>
-            <p>Continuing to explore AgriTech, IoT, robotics, electronics and STEM learning.</p>
-          </article>
+          <div class="journey-item">
+            <div class="journey-marker"></div>
+            <div class="journey-content">
+              <span class="journey-date">2023</span>
+              <h3>Innovation Challenges</h3>
+              <p>
+                Participation in innovation-focused events including
+                Bihar Innovation Challenge 2023 and Smart Bihar Hackathon 2023.
+              </p>
+            </div>
+          </div>
+
+          <div class="journey-item">
+            <div class="journey-marker"></div>
+            <div class="journey-content">
+              <span class="journey-date">Present</span>
+              <h3>Building and Exploring</h3>
+              <p>
+                Continuing to explore automation, AgriTech, IoT,
+                robotics and practical technology education.
+              </p>
+            </div>
+          </div>
+
         </div>
-
       </div>
     </section>
 
-    <!-- Team -->
+
+    <!-- Leadership Section -->
     <section class="section alternate-section" id="team">
-      <div class="section-container">
+      <div class="container">
 
         <div class="section-heading">
-          <span class="section-label">THE PEOPLE BEHIND THE IDEAS</span>
-          <h2>Meet Our <span class="gradient-text">Team.</span></h2>
-          <p>Driven by curiosity, learning and a passion for technology.</p>
+          <span class="section-label">LEADERSHIP</span>
+          <h2>Driven by <span class="gradient-text">Innovation.</span></h2>
+          <p>
+            Building practical technology solutions through research,
+            experimentation and engineering.
+          </p>
         </div>
 
-        <div class="team-grid">
+        <div class="team-grid founder-grid">
 
-          <article class="team-card">
-            <div class="team-avatar">MS</div>
+          <article class="team-card founder-card">
+            <div class="team-avatar">MSR</div>
+
             <h3>Madhav Singh Rajput</h3>
-            <p class="team-role">Founder</p>
-            <p>Interested in electronics, automation, IoT, robotics and technology innovation.</p>
-          </article>
+            <p class="team-role">Founder & Technology Lead</p>
 
-          <article class="team-card">
-            <div class="team-avatar">MP</div>
-            <h3>Muskan Priya</h3>
-            <p class="team-role">Co-Founder</p>
-            <p>Contributing to the SEA AUTO initiative and its development journey.</p>
+            <p>
+              Leading SEA AUTO's work across automation, embedded systems,
+              IoT, AgriTech and robotics, with a focus on practical
+              engineering solutions and technology education.
+            </p>
+
+            <a href="#contact" class="text-link">
+              Connect with SEA AUTO →
+            </a>
           </article>
 
         </div>
@@ -461,20 +527,26 @@
       </div>
     </section>
 
-    <!-- FAQ -->
+
+    <!-- FAQ Section -->
     <section class="section" id="faq">
-      <div class="section-container">
+      <div class="container faq-container">
 
         <div class="section-heading">
           <span class="section-label">FAQ</span>
-          <h2>Frequently Asked <span class="gradient-text">Questions.</span></h2>
+          <h2>Frequently Asked <span class="gradient-text">Questions</span></h2>
+          <p>Learn more about SEA AUTO and its areas of work.</p>
         </div>
 
         <div class="faq-list">
 
           <details class="faq-item">
             <summary>What is SEA AUTO?</summary>
-            <p>SEA AUTO is a technology initiative exploring automation, electronics, IoT, AgriTech, robotics and STEM education.</p>
+            <p>
+              SEA AUTO is an emerging technology initiative focused
+              on automation, IoT, AgriTech, robotics, electronics
+              and STEM education.
+            </p>
           </details>
 
           <details class="faq-item">
@@ -483,55 +555,64 @@
           </details>
 
           <details class="faq-item">
-            <summary>What projects does SEA AUTO work on?</summary>
-            <p>Our project areas include smart irrigation, plant interaction experiments, robotics and electronics-based prototypes.</p>
+            <summary>What areas does SEA AUTO focus on?</summary>
+            <p>
+              Its areas of focus include smart agriculture, automation,
+              electronics, embedded systems, robotics and technology education.
+            </p>
           </details>
 
           <details class="faq-item">
-            <summary>Can students contact SEA AUTO for training?</summary>
-            <p>Students and educational institutions can contact us to discuss possible training, workshops and learning activities.</p>
-          </details>
-
-          <details class="faq-item">
-            <summary>How can I discuss a project or collaboration?</summary>
-            <p>You can contact us through email or WhatsApp using the details on this page.</p>
+            <summary>How can I contact SEA AUTO?</summary>
+            <p>
+              You can contact SEA AUTO through email, WhatsApp
+              or the enquiry form on this website.
+            </p>
           </details>
 
         </div>
       </div>
     </section>
 
-    <!-- Contact -->
-    <section class="section contact-section alternate-section" id="contact">
-      <div class="section-container">
+
+    <!-- Contact Section -->
+    <section class="section contact-section" id="contact">
+      <div class="container">
 
         <div class="section-heading">
-          <span class="section-label">GET IN TOUCH</span>
+          <span class="section-label">BUSINESS ENQUIRIES</span>
           <h2>Let's Build Something <span class="gradient-text">Together.</span></h2>
-          <p>Have an idea, project enquiry or collaboration proposal? We would be happy to hear from you.</p>
+          <p>
+            Have an idea, project, collaboration or training enquiry?
+            We would be happy to hear from you.
+          </p>
         </div>
 
         <div class="contact-grid">
 
           <div class="contact-details">
 
-            <div class="contact-item">
+            <div class="contact-card">
               <span class="contact-icon">✉️</span>
               <div>
-                <small>Email</small>
-                <a href="mailto:contact.seaauto23@gmail.com">contact.seaauto23@gmail.com</a>
+                <small>Email Address</small>
+                <a href="mailto:contact.seaauto23@gmail.com">
+                  contact.seaauto23@gmail.com
+                </a>
               </div>
             </div>
 
-            <div class="contact-item">
+            <div class="contact-card">
               <span class="contact-icon">📞</span>
               <div>
                 <small>Phone / WhatsApp</small>
-                <a href="tel:+918298355455">+91 82983 55455</a>
+                <a href="https://wa.me/918298355455" target="_blank" rel="noopener">
+                  +91 82983 55455
+                </a>
               </div>
             </div>
 
-            <div class="contact-item">
+            <div class="contact-card">
               <span class="contact-icon">📍</span>
               <div>
                 <small>Location</small>
@@ -539,66 +620,89 @@
               </div>
             </div>
 
-            <a class="btn btn-whatsapp"
-               href="https://wa.me/918298355455"
-               target="_blank" rel="noopener noreferrer">
-              Chat on WhatsApp ↗
-            </a>
+            <div class="contact-social">
+              <h3>Connect with us</h3>
+              <a href="https://github.com/Madhav585/SEA-AUTO-V2" target="_blank" rel="noopener">
+                GitHub Repository ↗
+              </a>
+            </div>
 
           </div>
 
-          <!-- Contact Form: FormSubmit -->
-          <form class="contact-form"
-                id="sea-inquiry-form"
-                action="https://formsubmit.co/contact.seaauto23@gmail.com"
-                method="POST">
+
+          <div class="contact-form-wrapper">
 
             <h3>Send an Enquiry</h3>
+            <p>Fill out the form and share your requirements with us.</p>
 
-            <input type="hidden" name="_subject" value="New Enquiry - SEA AUTO Website">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_captcha" value="true">
+            <form
+              class="contact-form"
+              id="sea-inquiry-form"
+              action="https://formsubmit.co/contact.seaauto23@gmail.com"
+              method="POST"
+            >
 
-            <div class="form-group">
-              <label for="form-name">Your Name</label>
-              <input type="text" id="form-name" name="name"
-                     placeholder="Enter your name" required maxlength="100">
-            </div>
+              <input type="hidden" name="_subject" value="New Enquiry - SEA AUTO Website">
+              <input type="hidden" name="_template" value="table">
+              <input type="hidden" name="_captcha" value="true">
 
-            <div class="form-group">
-              <label for="form-email">Email Address</label>
-              <input type="email" id="form-email" name="email"
-                     placeholder="Enter your email" required maxlength="150">
-            </div>
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Enter your name"
+                  required
+                >
+              </div>
 
-            <div class="form-group">
-              <label for="form-intent">Enquiry Type</label>
-              <select id="form-intent" name="enquiry_type" required>
-                <option value="">Select enquiry type</option>
-                <option value="Project Enquiry">Project Enquiry</option>
-                <option value="Product / Solution Enquiry">Product / Solution Enquiry</option>
-                <option value="Internship Enquiry">Internship Enquiry</option>
-                <option value="Training / Workshop">Training / Workshop</option>
-                <option value="Collaboration">Collaboration</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  required
+                >
+              </div>
 
-            <div class="form-group">
-              <label for="form-msg">Your Message</label>
-              <textarea id="form-msg" name="message" rows="5"
-                        placeholder="Write your message..." required maxlength="5000"></textarea>
-            </div>
+              <div class="form-group">
+                <label for="enquiry_type">Enquiry Type</label>
+                <select id="enquiry_type" name="enquiry_type" required>
+                  <option value="">Select an enquiry type</option>
+                  <option value="Product and Solutions">Product & Solutions</option>
+                  <option value="Project Collaboration">Project Collaboration</option>
+                  <option value="Training and Education">Training & Education</option>
+                  <option value="Internship Enquiry">Internship Enquiry</option>
+                  <option value="Business Enquiry">Business Enquiry</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
 
-            <button type="submit" class="btn btn-primary form-submit">
-              Submit Enquiry →
-            </button>
+              <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  placeholder="Tell us about your enquiry..."
+                  required
+                ></textarea>
+              </div>
 
-            <p class="form-note">
-              Your enquiry will be submitted securely through our contact form service.
-            </p>
+              <button type="submit" class="btn btn-primary submit-btn">
+                Submit Enquiry <span>→</span>
+              </button>
 
-          </form>
+              <p class="form-note">
+                Your enquiry will be processed through our email form service.
+              </p>
+
+            </form>
+
+          </div>
 
         </div>
       </div>
@@ -606,57 +710,79 @@
 
   </main>
 
+
   <!-- Footer -->
   <footer class="footer">
-    <div class="section-container">
+
+    <div class="container">
 
       <div class="footer-main">
 
         <div class="footer-brand">
-          <a href="#home" class="logo">
-            <span class="logo-mark">SEA</span>
-            <span class="logo-text">
+          <a href="#home" class="brand">
+            <span class="brand-icon">S</span>
+            <span class="brand-text">
               <strong>SEA AUTO</strong>
-              <small>VISION TOWARDS AUTOMATION</small>
+              <small>Vision Towards Automation</small>
             </span>
           </a>
-          <p>Exploring technology through automation, IoT, AgriTech, robotics and electronics.</p>
+
+          <p>
+            Exploring technology, engineering and innovation
+            for practical real-world applications.
+          </p>
         </div>
 
         <div class="footer-links">
-          <h4>Explore</h4>
+          <h4>Quick Links</h4>
           <a href="#about">About Us</a>
           <a href="#solutions">Solutions</a>
           <a href="#projects">Projects</a>
           <a href="#education">Education</a>
+          <a href="#contact">Contact</a>
         </div>
 
         <div class="footer-links">
-          <h4>Connect</h4>
-          <a href="#team">Our Team</a>
-          <a href="#contact">Contact</a>
+          <h4>Our Focus</h4>
+          <a href="#solutions">Automation</a>
+          <a href="#solutions">IoT</a>
+          <a href="#solutions">AgriTech</a>
+          <a href="#solutions">Robotics</a>
+          <a href="#education">STEM Education</a>
+        </div>
+
+        <div class="footer-links">
+          <h4>Contact</h4>
           <a href="mailto:contact.seaauto23@gmail.com">Email Us</a>
-          <a href="https://wa.me/918298355455" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          <a href="https://wa.me/918298355455" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="https://github.com/Madhav585/SEA-AUTO-V2" target="_blank" rel="noopener">GitHub</a>
+          <span>Begusarai, Bihar, India</span>
         </div>
 
       </div>
 
       <div class="footer-bottom">
-        <p>© <span id="current-year">2026</span> SEA AUTO. All rights reserved.</p>
-        <p>Made with curiosity in Begusarai, Bihar, India.</p>
+        <p>© <span id="current-year"></span> SEA AUTO. All Rights Reserved.</p>
+        <p>Vision Towards Automation</p>
       </div>
 
     </div>
+
   </footer>
 
-  <a href="https://wa.me/918298355455"
-     class="whatsapp-floating"
-     target="_blank"
-     rel="noopener noreferrer"
-     aria-label="Contact SEA AUTO on WhatsApp">
-    ☎
+
+  <!-- WhatsApp Floating Button -->
+  <a
+    href="https://wa.me/918298355455"
+    class="whatsapp-float"
+    target="_blank"
+    rel="noopener"
+    aria-label="Chat with SEA AUTO on WhatsApp"
+  >
+    <span>WA</span>
   </a>
 
   <script src="script.js"></script>
+
 </body>
 </html>
