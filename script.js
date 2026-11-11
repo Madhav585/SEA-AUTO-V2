@@ -1,108 +1,73 @@
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  // Mobile Navigation
+document.addEventListener("DOMContentLoaded", () => {
   const menuToggle = document.getElementById("menu-toggle");
   const navLinks = document.getElementById("nav-links");
 
+  // Responsive mobile navigation
   if (menuToggle && navLinks) {
+    const closeMenu = () => {
+      navLinks.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Open navigation");
+    };
 
-    menuToggle.addEventListener("click", function () {
+    menuToggle.addEventListener("click", () => {
       const isOpen = navLinks.classList.toggle("open");
-
       menuToggle.setAttribute("aria-expanded", String(isOpen));
-      menuToggle.setAttribute(
-        "aria-label",
-        isOpen ? "Close navigation" : "Open navigation"
-      );
+      menuToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
     });
 
-    navLinks.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        navLinks.classList.remove("open");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.setAttribute("aria-label", "Open navigation");
-      });
+    navLinks.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener("click", closeMenu);
     });
 
-    document.addEventListener("click", function (event) {
-      const clickedInsideMenu =
-        navLinks.contains(event.target) ||
-        menuToggle.contains(event.target);
-
-      if (!clickedInsideMenu) {
-        navLinks.classList.remove("open");
-        menuToggle.setAttribute("aria-expanded", "false");
+    document.addEventListener("click", event => {
+      if (!navLinks.contains(event.target) && !menuToggle.contains(event.target)) {
+        closeMenu();
       }
     });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 820) closeMenu();
+    });
   }
 
+  // Current year in footer
+  const year = document.getElementById("current-year");
+  if (year) year.textContent = new Date().getFullYear();
 
-  // Current Year
-  const yearElement = document.getElementById("current-year");
-
-  if (yearElement) {
-    yearElement.textContent = new Date().getFullYear();
-  }
-
-
-  // Active Navigation Link
+  // Highlight current section in navigation
   const sections = document.querySelectorAll("main section[id]");
-  const navItems = document.querySelectorAll(".nav-links a");
+  const navItems = document.querySelectorAll('.nav-links a[href^="#"]');
 
-  function updateActiveNavigation() {
-
-    let currentSection = "";
-
-    sections.forEach(function (section) {
-      const sectionTop = section.offsetTop - 150;
-
-      if (window.scrollY >= sectionTop) {
-        currentSection = section.getAttribute("id");
-      }
+  const updateActiveLink = () => {
+    let current = "";
+    const marker = window.scrollY + 160;
+    sections.forEach(section => {
+      if (marker >= section.offsetTop) current = section.id;
     });
-
-    navItems.forEach(function (link) {
-      link.classList.remove("active");
-
-      if (link.getAttribute("href") === "#" + currentSection) {
-        link.classList.add("active");
-      }
+    navItems.forEach(link => {
+      link.classList.toggle("active", link.getAttribute("href") === `#${current}`);
     });
-  }
+  };
 
-  window.addEventListener("scroll", updateActiveNavigation, {
-    passive: true
-  });
+  window.addEventListener("scroll", updateActiveLink, { passive: true });
+  updateActiveLink();
 
-  updateActiveNavigation();
-
-
-  // Contact Form Validation and Submission
-  const contactForm = document.getElementById("sea-inquiry-form");
-
-  if (contactForm) {
-
-    contactForm.addEventListener("submit", function (event) {
-
-      if (!contactForm.checkValidity()) {
+  // Validate form but allow FormSubmit's normal POST request.
+  const form = document.getElementById("sea-inquiry-form");
+  if (form) {
+    form.addEventListener("submit", event => {
+      if (!form.checkValidity()) {
         event.preventDefault();
-        contactForm.reportValidity();
+        form.reportValidity();
         return;
       }
-
-      const submitButton = contactForm.querySelector(
-        'button[type="submit"]'
-      );
-
-      if (submitButton) {
-        submitButton.disabled = true;
-        submitButton.innerHTML = "Submitting...";
+      const button = form.querySelector('button[type="submit"]');
+      if (button) {
+        button.disabled = true;
+        button.innerHTML = "Submitting...";
       }
-
-      // Native form submission is intentionally allowed.
-      // FormSubmit processes the enquiry.
+      // Do not preventDefault: FormSubmit must receive the form submission.
     });
   }
-
 });
